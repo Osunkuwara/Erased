@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "N8G: The Erased",
+      "hasCanvas": false,
+      "bodyTextLen": 247,
+      "bodyTextHash": "502b25be46e2010a0b80a30e86c2ab61b8999833c4c26977775a55c281390de5",
+      "bodyTextPrefix": "N8G PRESENTS The Erased The terraces are still here. The chimney",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "N8G: The Erased",
+      "hasCanvas": false,
+      "bodyTextLen": 247,
+      "bodyTextHash": "502b25be46e2010a0b80a30e86c2ab61b8999833c4c26977775a55c281390de5",
+      "bodyTextPrefix": "N8G PRESENTS The Erased The terraces are still here. The chimney",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}
