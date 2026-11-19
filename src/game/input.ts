@@ -115,9 +115,9 @@ export function bindInput(target: Window) {
     if (!GAME_KEYS.has(event.code)) return;
     keys.delete(event.code);
   };
-  const clear = () => keys.clear();
+  const clear = () => resetInput();
   const onHide = () => {
-    if (document.hidden) clear();
+    if (document.hidden) resetInput();
   };
 
   target.addEventListener("keydown", down);

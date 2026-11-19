@@ -1,10 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { _ as createStore, y as require_react } from "./@react-three/fiber+[...].mjs";
-//#region node_modules/zustand/esm/react.mjs
+import { v as createStore, y as require_react } from "./@react-three/fiber+[...].mjs";
+// node_modules/zustand/esm/react.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var identity = (arg) => arg;
 function useStore(api, selector = identity) {
-	const slice = import_react.useSyncExternalStore(api.subscribe, import_react.useCallback(() => selector(api.getState()), [api, selector]), import_react.useCallback(() => selector(api.getInitialState()), [api, selector]));
+	const slice = import_react.useSyncExternalStore(api.subscribe, import_react.useCallback(() => selector(api.getState()), [api, selector]), () => selector(api.getInitialState()));
 	import_react.useDebugValue(slice);
 	return slice;
 }
@@ -15,8 +15,7 @@ var createImpl = (createState) => {
 	return useBoundStore;
 };
 var create = ((createState) => createState ? createImpl(createState) : createImpl);
-//#endregion
-//#region node_modules/zustand/esm/middleware.mjs
+// node_modules/zustand/esm/middleware.mjs
 function createJSONStorage(getStorage, options) {
 	let storage;
 	try {
@@ -32,34 +31,25 @@ function createJSONStorage(getStorage, options) {
 				return JSON.parse(str2, options == null ? void 0 : options.reviver);
 			};
 			const str = (_a = storage.getItem(name)) != null ? _a : null;
-			if (str instanceof Promise) return str.then(parse);
+			if (isPromiseLike(str)) return str.then(parse);
 			return parse(str);
 		},
 		setItem: (name, newValue) => storage.setItem(name, JSON.stringify(newValue, options == null ? void 0 : options.replacer)),
 		removeItem: (name) => storage.removeItem(name)
 	};
 }
+var isPromiseLike = (value) => typeof (value == null ? void 0 : value.then) === "function";
+var toSyncThenable = (value) => ({ then(onFulfilled) {
+	return onFulfilled ? toThenable(onFulfilled)(value) : this;
+} });
 var toThenable = (fn) => (input) => {
 	try {
 		const result = fn(input);
-		if (result instanceof Promise) return result;
-		return {
-			then(onFulfilled) {
-				return toThenable(onFulfilled)(result);
-			},
-			catch(_onRejected) {
-				return this;
-			}
-		};
-	} catch (e) {
-		return {
-			then(_onFulfilled) {
-				return this;
-			},
-			catch(onRejected) {
-				return toThenable(onRejected)(e);
-			}
-		};
+		return isPromiseLike(result) ? result : toSyncThenable(result);
+	} catch (error) {
+		return { then(_onFulfilled, onRejected) {
+			return onRejected ? toThenable(onRejected)(error) : this;
+		} };
 	}
 };
 var persistImpl = (config, baseOptions) => (set, get, api) => {
@@ -90,8 +80,8 @@ var persistImpl = (config, baseOptions) => (set, get, api) => {
 		});
 	};
 	const savedSetState = api.setState;
-	api.setState = (state, replace) => {
-		savedSetState(state, replace);
+	api.setState = (...args) => {
+		savedSetState(...args);
 		return setItem();
 	};
 	const configResult = config((...args) => {
@@ -115,7 +105,7 @@ var persistImpl = (config, baseOptions) => (set, get, api) => {
 				if (typeof deserializedStorageValue.version === "number" && deserializedStorageValue.version !== options.version) {
 					if (options.migrate) {
 						const migration = options.migrate(deserializedStorageValue.state, deserializedStorageValue.version);
-						if (migration instanceof Promise) return migration.then((result) => [true, result]);
+						if (isPromiseLike(migration)) return migration.then((result) => [true, result]);
 						return [true, migration];
 					}
 					console.error(`State loaded from storage couldn't be migrated since no migrate function was provided`);
@@ -135,7 +125,7 @@ var persistImpl = (config, baseOptions) => (set, get, api) => {
 			stateFromStorage = get();
 			hasHydrated = true;
 			finishHydrationListeners.forEach((cb) => cb(stateFromStorage));
-		}).catch((e) => {
+		}).then(() => void 0, (e) => {
 			if (currentVersion !== hydrationVersion) return;
 			postRehydrationCallback?.(void 0, e);
 		});
@@ -153,7 +143,13 @@ var persistImpl = (config, baseOptions) => (set, get, api) => {
 			storage?.removeItem(options.name);
 		},
 		getOptions: () => options,
-		rehydrate: () => hydrate(),
+		rehydrate: () => {
+			try {
+				return Promise.resolve(hydrate());
+			} catch (error) {
+				return Promise.reject(error);
+			}
+		},
 		hasHydrated: () => hasHydrated,
 		onHydrate: (cb) => {
 			hydrationListeners.add(cb);
@@ -172,5 +168,4 @@ var persistImpl = (config, baseOptions) => (set, get, api) => {
 	return stateFromStorage || configResult;
 };
 var persist = persistImpl;
-//#endregion
 export { persist as n, create as r, createJSONStorage as t };

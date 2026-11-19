@@ -7,7 +7,7 @@ import * as THREE from "three";
 import { tryRecord } from "@/game/actions";
 import { setHumLevel } from "@/game/audio";
 import { clearProbe, publishProbe, writeProbe } from "@/game/controls-test";
-import { MEMORY_ANCHOR, MEMORY_ID } from "@/game/content";
+import { MEMORY_ID, RECORDS } from "@/game/content";
 import { readMove } from "@/game/input";
 import { HUM_SOURCES } from "@/game/layout";
 import { dampAngle } from "@/game/math";
@@ -36,6 +36,7 @@ export function Player({ onReady }: PlayerProps) {
   const pitch = useRef(0.32);
   const dragging = useRef(false);
   const lookPointer = useRef<number | null>(null);
+  const lastPointerPos = useRef<{ x: number; y: number } | null>(null);
   const coyote = useRef(0.14);
   const jumpBuffer = useRef(0);
   const jumpPrev = useRef(false);
@@ -69,21 +70,31 @@ export function Player({ onReady }: PlayerProps) {
       if (target?.closest("[data-ui]")) return;
       if (event.pointerType === "mouse" && event.button !== 0 && event.button !== 2) return;
       lookPointer.current = event.pointerId;
+      lastPointerPos.current = { x: event.clientX, y: event.clientY };
     };
     const movePointer = (event: PointerEvent) => {
       if (lookPointer.current !== event.pointerId) return;
-      if (event.movementX === 0 && event.movementY === 0) return;
+      const last = lastPointerPos.current;
+      if (!last) {
+        lastPointerPos.current = { x: event.clientX, y: event.clientY };
+        return;
+      }
+      const dx = event.clientX - last.x;
+      const dy = event.clientY - last.y;
+      lastPointerPos.current = { x: event.clientX, y: event.clientY };
+      if (dx === 0 && dy === 0) return;
       dragging.current = true;
       const mode = useGameStore.getState().cameraMode;
       const sens = mode === "first" ? 0.0026 : 0.0034;
-      camYaw.current -= event.movementX * sens;
+      camYaw.current -= dx * sens;
       const max = mode === "first" ? 1.15 : 0.9;
       const min = mode === "first" ? -1.05 : -0.15;
-      pitch.current = Math.max(min, Math.min(max, pitch.current - event.movementY * sens));
+      pitch.current = Math.max(min, Math.min(max, pitch.current - dy * sens));
     };
     const up = (event: PointerEvent) => {
       if (lookPointer.current !== event.pointerId) return;
       lookPointer.current = null;
+      lastPointerPos.current = null;
       dragging.current = false;
     };
     window.addEventListener("pointerdown", down);
@@ -208,14 +219,24 @@ export function Player({ onReady }: PlayerProps) {
     }
     cam.lookAt(look);
 
-    const dx = nx - MEMORY_ANCHOR.x;
-    const dz = nz - MEMORY_ANCHOR.z;
-    const near = dx * dx + dz * dz < INTERACT_RADIUS * INTERACT_RADIUS;
-    if (near !== nearRef.current) {
-      nearRef.current = near;
-      useGameStore.getState().setNearMemory(near);
+    let isNearAny = false;
+    let nearestRecordId = MEMORY_ID;
+    for (const record of RECORDS) {
+      if (!record.position) continue;
+      const dx = nx - record.position.x;
+      const dz = nz - record.position.z;
+      if (dx * dx + dz * dz < INTERACT_RADIUS * INTERACT_RADIUS) {
+        isNearAny = true;
+        nearestRecordId = record.id;
+      }
     }
-    if (input.interact && !interactPrev.current && near) tryRecord(MEMORY_ID);
+    if (isNearAny !== nearRef.current) {
+      nearRef.current = isNearAny;
+      useGameStore.getState().setNearMemory(isNearAny);
+    }
+    if (input.interact && !interactPrev.current && isNearAny) {
+      tryRecord(nearestRecordId);
+    }
     interactPrev.current = input.interact;
 
     let nearest = Infinity;
@@ -240,6 +261,7 @@ export function Player({ onReady }: PlayerProps) {
   const avatar = useGameStore((s) => s.avatar);
   const skin = SKINS[avatar.skin];
   const cloth = CLOTHS[avatar.cloth];
+  const nearMemory = useGameStore((s) => s.nearMemory);
 
   return (
     <RigidBody
@@ -251,27 +273,107 @@ export function Player({ onReady }: PlayerProps) {
     >
       <CapsuleCollider args={[0.4, 0.28]} />
       <group ref={visual}>
+        {/* Main Tunic / Robe Body */}
         <mesh castShadow position={[0, 0, 0]}>
-          <capsuleGeometry args={[0.28, 0.78, 6, 10]} />
-          <meshStandardMaterial color={cloth} roughness={0.78} />
+          <capsuleGeometry args={[0.28, 0.76, 8, 12]} />
+          <meshStandardMaterial color={cloth} roughness={0.78} metalness={0.08} />
         </mesh>
-        <mesh castShadow position={[0.32, 0.12, 0]} rotation={[0, 0, 0.18]}>
-          <capsuleGeometry args={[0.07, 0.36, 4, 8]} />
-          <meshStandardMaterial color={skin} roughness={0.7} />
+
+        {/* Tunic Collar Trim */}
+        <mesh position={[0, 0.38, 0]}>
+          <cylinderGeometry args={[0.22, 0.25, 0.08, 12]} />
+          <meshStandardMaterial color={WORLD.gem} roughness={0.5} metalness={0.3} />
         </mesh>
-        <mesh castShadow position={[-0.32, 0.12, 0]} rotation={[0, 0, -0.18]}>
-          <capsuleGeometry args={[0.07, 0.36, 4, 8]} />
-          <meshStandardMaterial color={skin} roughness={0.7} />
+
+        {/* Belt / Sash */}
+        <mesh position={[0, -0.05, 0]}>
+          <cylinderGeometry args={[0.29, 0.29, 0.1, 12]} />
+          <meshStandardMaterial color={WORLD.dark} roughness={0.6} />
         </mesh>
-        <mesh castShadow position={[0, 0.62, 0]}>
-          <sphereGeometry args={[0.2, 16, 14]} />
-          <meshStandardMaterial color={skin} roughness={0.62} />
+        <mesh position={[0, -0.05, 0.28]}>
+          <boxGeometry args={[0.1, 0.08, 0.05]} />
+          <meshStandardMaterial color={WORLD.copper} roughness={0.4} metalness={0.6} />
         </mesh>
-        <mesh position={[0, 0.64, 0.16]}>
-          <boxGeometry args={[0.07, 0.045, 0.06]} />
+
+        {/* Traveler's Satchel / Backpack */}
+        <mesh castShadow position={[0, 0.05, -0.18]}>
+          <boxGeometry args={[0.32, 0.38, 0.2]} />
+          <meshStandardMaterial color={WORLD.trunk} roughness={0.8} />
+        </mesh>
+
+        {/* Left Arm & Sleeve */}
+        <group position={[0.34, 0.08, 0]} rotation={[0, 0, 0.12]}>
+          <mesh castShadow position={[0, -0.1, 0]}>
+            <capsuleGeometry args={[0.07, 0.4, 6, 8]} />
+            <meshStandardMaterial color={cloth} roughness={0.75} />
+          </mesh>
+          <mesh castShadow position={[0, -0.32, 0]}>
+            <sphereGeometry args={[0.07, 8, 8]} />
+            <meshStandardMaterial color={skin} roughness={0.7} />
+          </mesh>
+        </group>
+
+        {/* Right Arm & Sleeve */}
+        <group position={[-0.34, 0.08, 0]} rotation={[0, 0, -0.12]}>
+          <mesh castShadow position={[0, -0.1, 0]}>
+            <capsuleGeometry args={[0.07, 0.4, 6, 8]} />
+            <meshStandardMaterial color={cloth} roughness={0.75} />
+          </mesh>
+          <mesh castShadow position={[0, -0.32, 0]}>
+            <sphereGeometry args={[0.07, 8, 8]} />
+            <meshStandardMaterial color={skin} roughness={0.7} />
+          </mesh>
+        </group>
+
+        {/* Head */}
+        <mesh castShadow position={[0, 0.64, 0]}>
+          <sphereGeometry args={[0.21, 18, 16]} />
+          <meshStandardMaterial color={skin} roughness={0.65} />
+        </mesh>
+
+        {/* Traveler's Hood / Headwrap */}
+        <mesh castShadow position={[0, 0.74, -0.04]} rotation={[0.2, 0, 0]}>
+          <sphereGeometry args={[0.22, 16, 12, 0, Math.PI * 2, 0, Math.PI * 0.6]} />
+          <meshStandardMaterial color={cloth} roughness={0.8} />
+        </mesh>
+
+        {/* Face Features (Eyes & Nose) */}
+        <mesh position={[0.07, 0.66, 0.18]}>
+          <boxGeometry args={[0.04, 0.03, 0.04]} />
           <meshStandardMaterial color={WORLD.skinDeep} roughness={0.5} />
+        </mesh>
+        <mesh position={[-0.07, 0.66, 0.18]}>
+          <boxGeometry args={[0.04, 0.03, 0.04]} />
+          <meshStandardMaterial color={WORLD.skinDeep} roughness={0.5} />
+        </mesh>
+        <mesh position={[0, 0.62, 0.2]}>
+          <boxGeometry args={[0.05, 0.06, 0.06]} />
+          <meshStandardMaterial color={skin} roughness={0.6} />
+        </mesh>
+
+        {/* Glowing Memory Amulet / Pendant on Chest */}
+        <mesh position={[0, 0.22, 0.16]}>
+          <octahedronGeometry args={[0.06]} />
+          <meshStandardMaterial
+            color={nearMemory ? WORLD.gem : WORLD.copper}
+            emissive={nearMemory ? WORLD.gemEmissive : "#000000"}
+            emissiveIntensity={nearMemory ? 1.2 : 0}
+            roughness={0.2}
+            metalness={0.8}
+          />
+        </mesh>
+
+        {/* Boots */}
+        <mesh position={[0.13, -0.46, 0.04]}>
+          <boxGeometry args={[0.12, 0.14, 0.18]} />
+          <meshStandardMaterial color={WORLD.dark} roughness={0.85} />
+        </mesh>
+        <mesh position={[-0.13, -0.46, 0.04]}>
+          <boxGeometry args={[0.12, 0.14, 0.18]} />
+          <meshStandardMaterial color={WORLD.dark} roughness={0.85} />
         </mesh>
       </group>
     </RigidBody>
   );
 }
+

@@ -4,7 +4,7 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import type { Mesh } from "three";
 import * as THREE from "three";
 import { tryRecord } from "@/game/actions";
-import { MEMORY_ID } from "@/game/content";
+import { RECORDS } from "@/game/content";
 import { BOXES, CHIMNEYS, PALMS, type BoxSpec } from "@/game/layout";
 import { WORLD } from "@/game/palette";
 import { useGameStore } from "@/game/store";
@@ -80,25 +80,25 @@ function Palm({ position }: { position: [number, number, number] }) {
   );
 }
 
-function MemoryGem() {
+function MemoryGem({ id, position }: { id: string; position: { x: number; y: number; z: number } }) {
   const ref = useRef<Mesh>(null);
-  const recorded = useGameStore((s) => s.memories.includes(MEMORY_ID));
+  const recorded = useGameStore((s) => s.memories.includes(id));
 
   useFrame(({ clock }) => {
     const mesh = ref.current;
     if (!mesh) return;
     mesh.rotation.y = clock.elapsedTime * 0.55;
-    mesh.position.y = 1.42 + Math.sin(clock.elapsedTime * 1.6) * 0.06;
+    mesh.position.y = (position.y || 0) + 1.42 + Math.sin(clock.elapsedTime * 1.6 + position.x) * 0.06;
   });
 
   return (
     <mesh
       ref={ref}
-      position={[1.7, 1.42, 4.2]}
+      position={[position.x, (position.y || 0) + 1.42, position.z]}
       castShadow
       onClick={(event) => {
         event.stopPropagation();
-        tryRecord(MEMORY_ID);
+        tryRecord(id);
       }}
       onPointerOver={() => {
         document.body.style.cursor = "pointer";
@@ -116,6 +116,57 @@ function MemoryGem() {
         metalness={0.2}
       />
     </mesh>
+  );
+}
+
+function WorldRegions() {
+  return (
+    <>
+      {/* The Quarry (North-West) */}
+      <RigidBody type="fixed" colliders="cuboid" position={[-14, 1.2, -10]}>
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[8, 2.4, 8]} />
+          <meshStandardMaterial color={WORLD.stone} roughness={0.9} />
+        </mesh>
+      </RigidBody>
+      <RigidBody type="fixed" colliders="cuboid" position={[-14, 2.8, -10]}>
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[5, 1.2, 5]} />
+          <meshStandardMaterial color={WORLD.clay} roughness={0.88} />
+        </mesh>
+      </RigidBody>
+
+      {/* House of Remembering & Council Ring (South-East) */}
+      <RigidBody type="fixed" colliders="cuboid" position={[14, 1.5, -10]}>
+        <mesh castShadow receiveShadow>
+          <cylinderGeometry args={[4.5, 4.8, 3, 16]} />
+          <meshStandardMaterial color={WORLD.dark} roughness={0.85} />
+        </mesh>
+      </RigidBody>
+
+      {/* Pelan Island & Second Dome (East) */}
+      <RigidBody type="fixed" colliders="cuboid" position={[24, 0.8, 14]}>
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[12, 1.6, 12]} />
+          <meshStandardMaterial color={WORLD.sand} roughness={0.9} />
+        </mesh>
+      </RigidBody>
+
+      {/* The Ice Wall & Sealed Vault (Far South) */}
+      <RigidBody type="fixed" colliders="cuboid" position={[0, 6, -28]}>
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[36, 12, 4]} />
+          <meshStandardMaterial color="#c2e3ed" roughness={0.3} metalness={0.2} emissive="#48829c" emissiveIntensity={0.2} />
+        </mesh>
+      </RigidBody>
+      {/* Vault Door */}
+      <RigidBody type="fixed" colliders="cuboid" position={[0, 2.5, -26]}>
+        <mesh castShadow>
+          <cylinderGeometry args={[2.5, 2.5, 0.6, 24]} rotation={[Math.PI / 2, 0, 0]} />
+          <meshStandardMaterial color="#222c33" metalness={0.8} roughness={0.2} />
+        </mesh>
+      </RigidBody>
+    </>
   );
 }
 
@@ -139,25 +190,25 @@ function Ground() {
     const tex = new THREE.CanvasTexture(canvas);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.RepeatWrapping;
-    tex.repeat.set(12, 12);
+    tex.repeat.set(16, 16);
     return tex;
   }, []);
 
   return (
     <>
       <RigidBody type="fixed" colliders={false} position={[0, -0.5, 0]}>
-        <CuboidCollider args={[40, 0.5, 40]} />
+        <CuboidCollider args={[60, 0.5, 60]} />
       </RigidBody>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]} receiveShadow>
-        <planeGeometry args={[80, 80]} />
+        <planeGeometry args={[120, 120]} />
         <meshStandardMaterial color={WORLD.ground} roughness={1} roughnessMap={texture ?? undefined} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 5]} receiveShadow>
-        <planeGeometry args={[3.2, 8]} />
+        <planeGeometry args={[3.2, 12]} />
         <meshStandardMaterial color={WORLD.groundAlt} roughness={0.95} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-4.8, 0.025, 3]}>
-        <planeGeometry args={[1.15, 11]} />
+        <planeGeometry args={[1.15, 20]} />
         <meshStandardMaterial color={WORLD.water} roughness={0.22} metalness={0.18} />
       </mesh>
       <mesh position={[4.7, 0.08, 7.4]} receiveShadow>
@@ -174,10 +225,10 @@ function Ground() {
 
 function Bounds() {
   const walls: [number, number, number, number, number, number][] = [
-    [0, 3, -26, 30, 3, 0.5],
-    [0, 3, 18, 30, 3, 0.5],
-    [-24, 3, 0, 0.5, 3, 24],
-    [24, 3, 0, 0.5, 3, 24],
+    [0, 3, -42, 50, 3, 0.5],
+    [0, 3, 34, 50, 3, 0.5],
+    [-40, 3, 0, 0.5, 3, 40],
+    [40, 3, 0, 0.5, 3, 40],
   ];
   return (
     <>
@@ -191,10 +242,13 @@ function Bounds() {
 }
 
 export function World() {
+  const memoryRecords = useMemo(() => RECORDS.filter((r) => r.position), []);
+
   return (
     <>
       <Ground />
       <Bounds />
+      <WorldRegions />
       {BOXES.map((box) => (
         <Stone key={box.position.join(":") + box.size.join("x")} {...box} />
       ))}
@@ -204,7 +258,9 @@ export function World() {
       {PALMS.map((position) => (
         <Palm key={position.join(":")} position={position} />
       ))}
-      <MemoryGem />
+      {memoryRecords.map((record) => (
+        <MemoryGem key={record.id} id={record.id} position={record.position!} />
+      ))}
     </>
   );
 }

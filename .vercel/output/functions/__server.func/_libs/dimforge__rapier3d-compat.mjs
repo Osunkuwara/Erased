@@ -1,5 +1,5 @@
 import { n as __exportAll } from "../_runtime.mjs";
-//#region node_modules/@dimforge/rapier3d-compat/rapier.mjs
+// node_modules/@dimforge/rapier3d-compat/rapier.mjs
 var rapier_exports = /* @__PURE__ */ __exportAll({
 	ActiveCollisionTypes: () => wI,
 	ActiveEvents: () => EI,
@@ -5457,5 +5457,4 @@ var jg = Object.freeze({
 	PidController: Ng,
 	DynamicRayCastVehicleController: Fg
 });
-//#endregion
 export { kI as a, fA as i, Rg as n, rapier_exports as o, cg as r, EI as t };

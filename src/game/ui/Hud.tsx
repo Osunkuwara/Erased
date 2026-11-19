@@ -16,6 +16,15 @@ function Joystick() {
   const pad = useRef<HTMLDivElement>(null);
   const pointer = useRef<number | null>(null);
   const [knob, setKnob] = useState({ x: 0, y: 0 });
+  const archiveOpen = useGameStore((s) => s.archiveOpen);
+
+  useEffect(() => {
+    if (archiveOpen) {
+      pointer.current = null;
+      setKnob({ x: 0, y: 0 });
+      setStick(0, 0, false);
+    }
+  }, [archiveOpen]);
 
   function place(event: PointerEvent<HTMLDivElement>) {
     const rect = pad.current?.getBoundingClientRect();
@@ -36,13 +45,30 @@ function Joystick() {
     setStick(x, y, mag >= 0.12);
   }
 
+  function resetJoystick(event?: PointerEvent<HTMLDivElement>) {
+    if (event && event.currentTarget && event.currentTarget.hasPointerCapture(event.pointerId)) {
+      try {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      } catch {
+        // ignore
+      }
+    }
+    pointer.current = null;
+    setKnob({ x: 0, y: 0 });
+    setStick(0, 0, false);
+  }
+
   return (
     <div
       ref={pad}
       data-ui
       className="relative size-32 rounded-full border border-border bg-surface/80"
       onPointerDown={(event) => {
-        event.currentTarget.setPointerCapture(event.pointerId);
+        try {
+          event.currentTarget.setPointerCapture(event.pointerId);
+        } catch {
+          // ignore
+        }
         pointer.current = event.pointerId;
         place(event);
       }}
@@ -52,14 +78,13 @@ function Joystick() {
       }}
       onPointerUp={(event) => {
         if (pointer.current !== event.pointerId) return;
-        pointer.current = null;
-        setKnob({ x: 0, y: 0 });
-        setStick(0, 0, false);
+        resetJoystick(event);
       }}
-      onPointerCancel={() => {
-        pointer.current = null;
-        setKnob({ x: 0, y: 0 });
-        setStick(0, 0, false);
+      onPointerCancel={(event) => {
+        resetJoystick(event);
+      }}
+      onLostPointerCapture={(event) => {
+        resetJoystick(event);
       }}
     >
       <span
@@ -81,6 +106,30 @@ function HoldButton({
   disabled?: boolean;
   onPress?: () => void;
 }) {
+  const pointerIdRef = useRef<number | null>(null);
+  const archiveOpen = useGameStore((s) => s.archiveOpen);
+
+  useEffect(() => {
+    if (archiveOpen) {
+      pointerIdRef.current = null;
+      setHold(hold, false);
+    }
+  }, [archiveOpen, hold]);
+
+  function releaseHold(event?: PointerEvent<HTMLButtonElement>) {
+    if (event && event.currentTarget && pointerIdRef.current !== null) {
+      try {
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+      } catch {
+        // ignore
+      }
+    }
+    pointerIdRef.current = null;
+    setHold(hold, false);
+  }
+
   return (
     <button
       type="button"
@@ -89,12 +138,18 @@ function HoldButton({
       className="min-h-14 min-w-14 rounded-full border border-border bg-surface px-4 text-sm font-medium text-fg disabled:opacity-40"
       onPointerDown={(event) => {
         event.preventDefault();
+        try {
+          event.currentTarget.setPointerCapture(event.pointerId);
+        } catch {
+          // ignore
+        }
+        pointerIdRef.current = event.pointerId;
         setHold(hold, true);
         onPress?.();
       }}
-      onPointerUp={() => setHold(hold, false)}
-      onPointerLeave={() => setHold(hold, false)}
-      onPointerCancel={() => setHold(hold, false)}
+      onPointerUp={(event) => releaseHold(event)}
+      onPointerCancel={(event) => releaseHold(event)}
+      onLostPointerCapture={(event) => releaseHold(event)}
       onContextMenu={(event) => event.preventDefault()}
     >
       {label}

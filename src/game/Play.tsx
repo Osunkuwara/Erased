@@ -27,6 +27,9 @@ export default function Play({ onLeave }: PlayProps) {
 
   useEffect(() => {
     setInputBlocked(archiveOpen);
+    if (archiveOpen) {
+      resetInput();
+    }
   }, [archiveOpen]);
 
   function leave() {

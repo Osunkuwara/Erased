@@ -1,9 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { v as require_jsx_runtime, y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
+import { y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
 import { n as persist, r as create, t as createJSONStorage } from "../_libs/zustand.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-DhP25J7r.js
+import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
+// node_modules/.nitro/vite/services/ssr/assets/routes-DX9VwHwk.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
-var import_jsx_runtime = require_jsx_runtime();
+var import_jsx_dev_runtime = require_jsx_dev_runtime();
 var __defProp = Object.defineProperty;
 var __exportAll = (all, no_symbols) => {
 	let target = {};
@@ -231,14 +232,23 @@ var CLOTH_OPTIONS = [
 		label: "Cream"
 	}
 ];
+var _jsxFileName$1 = "/app/applet/src/game/ui/EntryScreen.tsx";
 function Settling({ overlay = false }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 		className: `${overlay ? "absolute inset-0 z-20" : "h-dvh"} flex items-center justify-center bg-bg px-6 text-center`,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 			className: "font-display text-3xl text-fg",
 			children: "The terraces are settling…"
-		})
-	});
+		}, void 0, false, {
+			fileName: _jsxFileName$1,
+			lineNumber: 23,
+			columnNumber: 7
+		}, this)
+	}, void 0, false, {
+		fileName: _jsxFileName$1,
+		lineNumber: 20,
+		columnNumber: 5
+	}, this);
 }
 function EntryScreen({ onStart }) {
 	const savedName = useGameStore((s) => s.playerName);
@@ -276,48 +286,88 @@ function EntryScreen({ onStart }) {
 		unlockAudio();
 		onStart();
 	}
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("main", {
 		className: "relative flex min-h-dvh items-center justify-center overflow-hidden bg-bg px-5 py-10",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 			className: "terrace-silhouette",
 			"aria-hidden": "true",
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "chimney" }),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "step step-a" }),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "step step-b" }),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "step step-c" })
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "chimney" }, void 0, false, {
+					fileName: _jsxFileName$1,
+					lineNumber: 69,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "step step-a" }, void 0, false, {
+					fileName: _jsxFileName$1,
+					lineNumber: 70,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "step step-b" }, void 0, false, {
+					fileName: _jsxFileName$1,
+					lineNumber: 71,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "step step-c" }, void 0, false, {
+					fileName: _jsxFileName$1,
+					lineNumber: 72,
+					columnNumber: 9
+				}, this)
 			]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+		}, void 0, true, {
+			fileName: _jsxFileName$1,
+			lineNumber: 68,
+			columnNumber: 7
+		}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("form", {
 			className: "relative z-10 flex w-full max-w-md flex-col gap-5",
 			onSubmit: (event) => {
 				event.preventDefault();
 				begin();
 			},
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 					className: "flex flex-col gap-2",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 							className: "text-xs font-medium tracking-widest text-accent uppercase",
 							children: "N8G presents"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						}, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 83,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", {
 							className: "font-display text-6xl leading-none text-fg sm:text-7xl",
 							children: "The Erased"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						}, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 84,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 							className: "max-w-sm text-muted",
 							children: "The terraces are still here. The chimneys still carry the Hum."
-						})
+						}, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 85,
+							columnNumber: 11
+						}, this)
 					]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				}, void 0, true, {
+					fileName: _jsxFileName$1,
+					lineNumber: 82,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 					className: "flex flex-col gap-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("label", {
 						htmlFor: "player-name",
 						className: "text-sm font-medium text-fg",
 						children: "Create your identity"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 91,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("input", {
 						id: "player-name",
 						value: nameInput,
 						onChange: (event) => setNameInput(event.target.value),
@@ -325,18 +375,30 @@ function EntryScreen({ onStart }) {
 						maxLength: 24,
 						autoComplete: "off",
 						className: "min-h-11 rounded-lg border border-border bg-surface px-4 text-fg placeholder:text-muted"
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("fieldset", {
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 94,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$1,
+					lineNumber: 90,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("fieldset", {
 					className: "flex flex-col gap-3",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("legend", {
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("legend", {
 						className: "text-sm font-medium text-fg",
 						children: "Skin"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 106,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 						className: "flex gap-3",
 						role: "radiogroup",
 						"aria-label": "Skin",
-						children: SKIN_OPTIONS.map((option) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						children: SKIN_OPTIONS.map((option) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
 							type: "button",
 							role: "radio",
 							"aria-checked": skin === option.id,
@@ -344,19 +406,35 @@ function EntryScreen({ onStart }) {
 							onClick: () => setSkin(option.id),
 							className: `size-11 rounded-full border border-border ${skin === option.id ? "ring-2 ring-accent ring-offset-2 ring-offset-bg" : ""}`,
 							style: { backgroundColor: SKINS[option.id] }
-						}, option.id))
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("fieldset", {
+						}, option.id, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 109,
+							columnNumber: 15
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 107,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$1,
+					lineNumber: 105,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("fieldset", {
 					className: "flex flex-col gap-3",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("legend", {
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("legend", {
 						className: "text-sm font-medium text-fg",
 						children: "Cloth"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 126,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 						className: "flex gap-3",
 						role: "radiogroup",
 						"aria-label": "Cloth",
-						children: CLOTH_OPTIONS.map((option) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						children: CLOTH_OPTIONS.map((option) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
 							type: "button",
 							role: "radio",
 							"aria-checked": cloth === option.id,
@@ -364,22 +442,50 @@ function EntryScreen({ onStart }) {
 							onClick: () => setCloth(option.id),
 							className: `size-11 rounded-full border border-border ${cloth === option.id ? "ring-2 ring-accent ring-offset-2 ring-offset-bg" : ""}`,
 							style: { backgroundColor: CLOTHS[option.id] }
-						}, option.id))
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						}, option.id, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 129,
+							columnNumber: 15
+						}, this))
+					}, void 0, false, {
+						fileName: _jsxFileName$1,
+						lineNumber: 127,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$1,
+					lineNumber: 125,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
 					type: "submit",
 					className: "ui-fade min-h-12 rounded-lg bg-accent px-5 text-base font-medium text-bg transition-opacity duration-150 disabled:opacity-40",
 					disabled: !hydrated || !nameInput.trim(),
 					children: savedName ? "Start again in the terrace" : "Start in the terrace"
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				}, void 0, false, {
+					fileName: _jsxFileName$1,
+					lineNumber: 145,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 					className: "flex flex-col gap-2 text-sm text-muted",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Walk, run and jump. Switch the camera. Record what the city still remembers." }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Progress stays on this device." }),
-						recorded ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "You have already recorded “The chimney that sings”." }) : null,
-						hasSave ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { children: "Walk, run and jump. Switch the camera. Record what the city still remembers." }, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 154,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { children: "Progress stays on this device." }, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 155,
+							columnNumber: 11
+						}, this),
+						recorded ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", { children: "You have already recorded “The chimney that sings”." }, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 156,
+							columnNumber: 23
+						}, this) : null,
+						hasSave ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
 							type: "button",
 							className: "self-start text-sm text-fg underline decoration-border underline-offset-4",
 							onClick: () => {
@@ -389,22 +495,54 @@ function EntryScreen({ onStart }) {
 								setCloth("indigo");
 							},
 							children: "Forget this identity"
-						}) : null
+						}, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 158,
+							columnNumber: 13
+						}, this) : null
 					]
-				})
+				}, void 0, true, {
+					fileName: _jsxFileName$1,
+					lineNumber: 153,
+					columnNumber: 9
+				}, this)
 			]
-		})]
-	});
+		}, void 0, true, {
+			fileName: _jsxFileName$1,
+			lineNumber: 75,
+			columnNumber: 7
+		}, this)]
+	}, void 0, true, {
+		fileName: _jsxFileName$1,
+		lineNumber: 67,
+		columnNumber: 5
+	}, this);
 }
 var routes_exports = /* @__PURE__ */ __exportAll({ component: () => Home });
-var Play = (0, import_react.lazy)(() => import("./Play-CnFAut_V.mjs"));
+var _jsxFileName = "/app/applet/src/routes/index.tsx?tsr-split=component";
+var Play = (0, import_react.lazy)(() => import("./Play-DbK8FIRe.mjs"));
 function Home() {
 	const [live, setLive] = (0, import_react.useState)(false);
-	if (!live) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EntryScreen, { onStart: () => setLive(true) });
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.Suspense, {
-		fallback: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Settling, {}),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Play, { onLeave: () => setLive(false) })
-	});
+	if (!live) return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(EntryScreen, { onStart: () => setLive(true) }, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 6,
+		columnNumber: 21
+	}, this);
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_react.Suspense, {
+		fallback: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Settling, {}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 7,
+			columnNumber: 30
+		}, this),
+		children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Play, { onLeave: () => setLive(false) }, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 8,
+			columnNumber: 7
+		}, this)
+	}, void 0, false, {
+		fileName: _jsxFileName,
+		lineNumber: 7,
+		columnNumber: 10
+	}, this);
 }
-//#endregion
 export { WORLD as a, MEMORY_ANCHOR as c, ZONE_NAME as d, recordById as f, setHumLevel as h, SKINS as i, MEMORY_ID as l, chime as m, Settling as n, CANON_LABEL as o, useGameStore as p, CLOTHS as r, COMPANION_SHELF as s, routes_exports as t, PLACE_NOTES as u };

@@ -1,12 +1,14 @@
 import { i as __toESM, n as __exportAll } from "../_runtime.mjs";
-import { v as require_jsx_runtime, y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
+import { y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
+import { _ as createRootRoute, d as HeadContent, g as createFileRoute, h as lazyRouteComponent, m as Outlet, p as createRouter, u as Scripts, v as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
+import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
 import { i as TriangleAlert } from "../_libs/lucide-react.mjs";
-import { _ as createFileRoute, d as Scripts, f as HeadContent, g as lazyRouteComponent, h as Outlet, m as createRouter, v as createRootRoute, y as useRouter } from "../_libs/@tanstack/react-router+[...].mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-Dpg7kQ1P.js
-var router_Dpg7kQ1P_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+// node_modules/.nitro/vite/services/ssr/assets/router-lO7bx0c1.js
+var router_lO7bx0c1_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
-var import_jsx_runtime = require_jsx_runtime();
+var import_jsx_dev_runtime = require_jsx_dev_runtime();
+var _jsxFileName$2 = "/app/applet/src/lib/error-component.tsx";
 var FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
 function errorMessage(error) {
 	if (error instanceof Error && error.message) return error.message;
@@ -14,27 +16,47 @@ function errorMessage(error) {
 	return FALLBACK_MESSAGE;
 }
 function AppErrorComponent({ error }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("main", {
 		className: "flex min-h-screen flex-col items-center justify-center gap-3 px-6 text-center bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
 				className: "text-red-500",
 				"aria-hidden": "true",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, {
+				children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(TriangleAlert, {
 					className: "size-10",
 					strokeWidth: 2
-				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+				}, void 0, false, {
+					fileName: _jsxFileName$2,
+					lineNumber: 21,
+					columnNumber: 9
+				}, this)
+			}, void 0, false, {
+				fileName: _jsxFileName$2,
+				lineNumber: 20,
+				columnNumber: 7
+			}, this),
+			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h1", {
 				className: "text-lg font-semibold",
 				children: "Something went wrong"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			}, void 0, false, {
+				fileName: _jsxFileName$2,
+				lineNumber: 23,
+				columnNumber: 7
+			}, this),
+			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 				className: "max-w-md text-sm break-words text-zinc-500 dark:text-zinc-400",
 				children: errorMessage(error)
-			})
+			}, void 0, false, {
+				fileName: _jsxFileName$2,
+				lineNumber: 24,
+				columnNumber: 7
+			}, this)
 		]
-	});
+	}, void 0, true, {
+		fileName: _jsxFileName$2,
+		lineNumber: 14,
+		columnNumber: 5
+	}, this);
 }
 /**
 * Path-based preview hosts serve the dev server under `/{port_id}/` and strip
@@ -70,6 +92,7 @@ function previewPathRewrite() {
 	const prefix = previewPathPrefix(window.location.hostname, window.location.pathname);
 	return prefix ? prefixRewrite(prefix) : void 0;
 }
+var _jsxFileName$1 = "/app/applet/src/lib/auth/provider.tsx";
 /**
 * App-wide client provider mounted once near the root (in `src/routes/__root.tsx`):
 *
@@ -81,7 +104,11 @@ function previewPathRewrite() {
 * (e.g. a toast or theme provider) without churning the root shell.
 */
 function AuthProvider({ children }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children }, void 0, false, {
+		fileName: _jsxFileName$1,
+		lineNumber: 14,
+		columnNumber: 10
+	}, this);
 }
 var CONNECTOR_TOKEN_READY_EVENT = "grok:connector-token-ready";
 function isGrokEmbedderOrigin(origin) {
@@ -332,7 +359,8 @@ function PreviewHostBridge() {
 	}, [router]);
 	return null;
 }
-var styles_default = "/assets/styles-g6Y2XcnB.css";
+var styles_default = "/assets/styles-D0hC7_np.css";
+var _jsxFileName = "/app/applet/src/routes/__root.tsx";
 var APP_NAME = "N8G: The Erased";
 var Route$1 = createRootRoute({
 	head: () => ({
@@ -385,20 +413,52 @@ var Route$1 = createRootRoute({
 			}
 		]
 	}),
-	component: () => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("html", {
+	component: () => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("html", {
 		lang: "en",
 		suppressHydrationWarning: true,
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("head", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(HeadContent, {}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("body", {
+		children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("head", { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(HeadContent, {}, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 37,
+			columnNumber: 9
+		}, void 0) }, void 0, false, {
+			fileName: _jsxFileName,
+			lineNumber: 36,
+			columnNumber: 7
+		}, void 0), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("body", {
 			className: "bg-bg text-fg antialiased",
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PreviewHostBridge, {}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {}) }),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scripts, {})
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(PreviewHostBridge, {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 40,
+					columnNumber: 9
+				}, void 0),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(AuthProvider, { children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Outlet, {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 42,
+					columnNumber: 11
+				}, void 0) }, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 41,
+					columnNumber: 9
+				}, void 0),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Scripts, {}, void 0, false, {
+					fileName: _jsxFileName,
+					lineNumber: 44,
+					columnNumber: 9
+				}, void 0)
 			]
-		})]
-	})
+		}, void 0, true, {
+			fileName: _jsxFileName,
+			lineNumber: 39,
+			columnNumber: 7
+		}, void 0)]
+	}, void 0, true, {
+		fileName: _jsxFileName,
+		lineNumber: 35,
+		columnNumber: 5
+	}, void 0)
 });
-var $$splitComponentImporter = () => import("./routes-DhP25J7r.mjs").then((n) => n.t);
+var $$splitComponentImporter = () => import("./routes-4hLiTYmq.mjs").then((n) => n.t);
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({
 	id: "/",
 	path: "/",
@@ -412,5 +472,4 @@ function getRouter() {
 		defaultErrorComponent: AppErrorComponent
 	});
 }
-//#endregion
-export { getRouter, router_Dpg7kQ1P_exports as t };
+export { getRouter, router_lO7bx0c1_exports as t };
