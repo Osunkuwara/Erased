@@ -20,6 +20,8 @@ type Saved = {
 type GameState = Saved & {
   nearMemory: boolean;
   archiveOpen: boolean;
+  worldMapOpen: boolean;
+  currentRegion: string;
   justRecordedId: string | null;
   setPlayerName: (name: string) => void;
   setCameraMode: (mode: CameraMode) => void;
@@ -27,6 +29,8 @@ type GameState = Saved & {
   setAvatar: (avatar: Avatar) => void;
   setNearMemory: (near: boolean) => void;
   setArchiveOpen: (open: boolean) => void;
+  setWorldMapOpen: (open: boolean) => void;
+  setCurrentRegion: (region: string) => void;
   setMuted: (muted: boolean) => void;
   recordMemory: (id: string) => boolean;
   clearNotice: () => void;
@@ -47,6 +51,8 @@ export const useGameStore = create<GameState>()(
       ...initial,
       nearMemory: false,
       archiveOpen: false,
+      worldMapOpen: false,
+      currentRegion: "terraced-city",
       justRecordedId: null,
       setPlayerName: (playerName) => set({ playerName }),
       setCameraMode: (cameraMode) => set({ cameraMode }),
@@ -55,6 +61,8 @@ export const useGameStore = create<GameState>()(
       setAvatar: (avatar) => set({ avatar }),
       setNearMemory: (nearMemory) => set({ nearMemory }),
       setArchiveOpen: (archiveOpen) => set({ archiveOpen }),
+      setWorldMapOpen: (worldMapOpen) => set({ worldMapOpen }),
+      setCurrentRegion: (currentRegion) => set({ currentRegion }),
       setMuted: (muted) => set({ muted }),
       recordMemory: (id) => {
         const { memories } = get();
@@ -64,7 +72,7 @@ export const useGameStore = create<GameState>()(
       },
       clearNotice: () => set({ justRecordedId: null }),
       resetSave: () => {
-        set({ ...initial, nearMemory: false, archiveOpen: false, justRecordedId: null });
+        set({ ...initial, nearMemory: false, archiveOpen: false, worldMapOpen: false, currentRegion: "terraced-city", justRecordedId: null });
         void useGameStore.persist.clearStorage();
       },
     }),

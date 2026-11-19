@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react";
-import { BookOpen, Camera, Volume2, VolumeX, X } from "lucide-react";
+import { BookOpen, Camera, Globe, Volume2, VolumeX, X } from "lucide-react";
 import { tryRecord } from "@/game/actions";
 import {
   CANON_LABEL,
@@ -11,6 +11,7 @@ import {
 } from "@/game/content";
 import { setHold, setStick } from "@/game/input";
 import { useGameStore } from "@/game/store";
+import { WorldMapModal } from "@/game/ui/WorldMapModal";
 
 function Joystick() {
   const pad = useRef<HTMLDivElement>(null);
@@ -173,6 +174,9 @@ export function Hud({ onLeave }: { onLeave: () => void }) {
   const memories = useGameStore((s) => s.memories);
   const archiveOpen = useGameStore((s) => s.archiveOpen);
   const setArchiveOpen = useGameStore((s) => s.setArchiveOpen);
+  const worldMapOpen = useGameStore((s) => s.worldMapOpen);
+  const setWorldMapOpen = useGameStore((s) => s.setWorldMapOpen);
+  const setCurrentRegion = useGameStore((s) => s.setCurrentRegion);
   const muted = useGameStore((s) => s.muted);
   const setMuted = useGameStore((s) => s.setMuted);
   const justRecordedId = useGameStore((s) => s.justRecordedId);
@@ -190,11 +194,14 @@ export function Hud({ onLeave }: { onLeave: () => void }) {
     const down = (event: KeyboardEvent) => {
       if (event.repeat) return;
       if (event.code === "KeyC") toggleCamera();
-      if (event.code === "Escape") setArchiveOpen(false);
+      if (event.code === "Escape") {
+        setArchiveOpen(false);
+        setWorldMapOpen(false);
+      }
     };
     window.addEventListener("keydown", down);
     return () => window.removeEventListener("keydown", down);
-  }, [setArchiveOpen, toggleCamera]);
+  }, [setArchiveOpen, setWorldMapOpen, toggleCamera]);
 
   const notice = justRecordedId ? recordById(justRecordedId) : undefined;
 
@@ -213,6 +220,14 @@ export function Hud({ onLeave }: { onLeave: () => void }) {
             aria-label={muted ? "Unmute the Hum" : "Mute the Hum"}
           >
             {muted ? <VolumeX className="size-5" /> : <Volume2 className="size-5" />}
+          </button>
+          <button
+            type="button"
+            className="flex size-11 items-center justify-center rounded-lg border border-border bg-surface text-fg"
+            onClick={() => setWorldMapOpen(true)}
+            aria-label="Open world map"
+          >
+            <Globe className="size-5" />
           </button>
           <button
             type="button"
@@ -374,6 +389,15 @@ export function Hud({ onLeave }: { onLeave: () => void }) {
           </div>
         </div>
       ) : null}
+
+      <WorldMapModal
+        isOpen={worldMapOpen}
+        onClose={() => setWorldMapOpen(false)}
+        onTravel={(region) => {
+          setCurrentRegion(region.id);
+          setWorldMapOpen(false);
+        }}
+      />
     </div>
   );
 }
