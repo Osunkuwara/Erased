@@ -250,7 +250,7 @@ export function Player({ onReady }: PlayerProps) {
       publishProbe();
       published.current = true;
     }
-    writeProbe(bodyYaw.current, moving ? speed : 0, nx, ny, nz, near);
+    writeProbe(bodyYaw.current, moving ? speed : 0, nx, ny, nz, isNearAny);
 
     if (!readySent.current) {
       readySent.current = true;

@@ -4,8 +4,8 @@ import { _ as createRootRoute, d as HeadContent, g as createFileRoute, h as lazy
 import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
 import { i as TriangleAlert } from "../_libs/lucide-react.mjs";
 import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
-// node_modules/.nitro/vite/services/ssr/assets/router-GE0kGMkd.js
-var router_GE0kGMkd_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+// node_modules/.nitro/vite/services/ssr/assets/router-CZ46no9K.js
+var router_CZ46no9K_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_dev_runtime = require_jsx_dev_runtime();
 var _jsxFileName$2 = "/app/applet/src/lib/error-component.tsx";
@@ -359,7 +359,7 @@ function PreviewHostBridge() {
 	}, [router]);
 	return null;
 }
-var styles_default = "/assets/styles-DWQhX82P.css";
+var styles_default = "/assets/styles-Bj2CuhiS.css";
 var _jsxFileName = "/app/applet/src/routes/__root.tsx";
 var APP_NAME = "N8G: The Erased";
 var Route$1 = createRootRoute({
@@ -458,7 +458,7 @@ var Route$1 = createRootRoute({
 		columnNumber: 5
 	}, void 0)
 });
-var $$splitComponentImporter = () => import("./routes-DXD-CizU.mjs").then((n) => n.t);
+var $$splitComponentImporter = () => import("./routes-CPhIB9KC.mjs").then((n) => n.t);
 var rootRouteChildren = { IndexRoute: createFileRoute("/")({ component: lazyRouteComponent($$splitComponentImporter, "component") }).update({
 	id: "/",
 	path: "/",
@@ -472,4 +472,4 @@ function getRouter() {
 		defaultErrorComponent: AppErrorComponent
 	});
 }
-export { getRouter, router_GE0kGMkd_exports as t };
+export { getRouter, router_CZ46no9K_exports as t };

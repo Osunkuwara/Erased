@@ -63,8 +63,9 @@ function Joystick() {
     <div
       ref={pad}
       data-ui
-      className="relative size-32 rounded-full border border-border bg-surface/80"
+      className="relative size-32 rounded-full border border-border bg-surface/80 touch-none select-none"
       onPointerDown={(event) => {
+        event.preventDefault();
         try {
           event.currentTarget.setPointerCapture(event.pointerId);
         } catch {
@@ -74,10 +75,12 @@ function Joystick() {
         place(event);
       }}
       onPointerMove={(event) => {
+        event.preventDefault();
         if (pointer.current !== event.pointerId) return;
         place(event);
       }}
       onPointerUp={(event) => {
+        event.preventDefault();
         if (pointer.current !== event.pointerId) return;
         resetJoystick(event);
       }}
@@ -89,7 +92,7 @@ function Joystick() {
       }}
     >
       <span
-        className="absolute top-1/2 left-1/2 size-12 rounded-full bg-accent"
+        className="absolute top-1/2 left-1/2 size-12 rounded-full bg-accent pointer-events-none"
         style={{ transform: `translate(calc(-50% + ${knob.x * 36}px), calc(-50% + ${knob.y * 36}px))` }}
       />
     </div>
@@ -136,7 +139,7 @@ function HoldButton({
       type="button"
       data-ui
       disabled={disabled}
-      className="min-h-14 min-w-14 rounded-full border border-border bg-surface px-4 text-sm font-medium text-fg disabled:opacity-40"
+      className="min-h-14 min-w-14 rounded-full border border-border bg-surface px-4 text-sm font-medium text-fg disabled:opacity-40 touch-none select-none"
       onPointerDown={(event) => {
         event.preventDefault();
         try {

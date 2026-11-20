@@ -2,7 +2,7 @@ import { i as __toESM } from "../_runtime.mjs";
 import { y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
 import { n as persist, r as create, t as createJSONStorage } from "../_libs/zustand.mjs";
 import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
-// node_modules/.nitro/vite/services/ssr/assets/routes-DX9VwHwk.js
+// node_modules/.nitro/vite/services/ssr/assets/routes-CPhIB9KC.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_dev_runtime = require_jsx_dev_runtime();
 var __defProp = Object.defineProperty;
@@ -88,6 +88,8 @@ var useGameStore = create()(persist((set, get) => ({
 	...initial,
 	nearMemory: false,
 	archiveOpen: false,
+	worldMapOpen: false,
+	currentRegion: "terraced-city",
 	justRecordedId: null,
 	setPlayerName: (playerName) => set({ playerName }),
 	setCameraMode: (cameraMode) => set({ cameraMode }),
@@ -95,6 +97,8 @@ var useGameStore = create()(persist((set, get) => ({
 	setAvatar: (avatar) => set({ avatar }),
 	setNearMemory: (nearMemory) => set({ nearMemory }),
 	setArchiveOpen: (archiveOpen) => set({ archiveOpen }),
+	setWorldMapOpen: (worldMapOpen) => set({ worldMapOpen }),
+	setCurrentRegion: (currentRegion) => set({ currentRegion }),
 	setMuted: (muted) => set({ muted }),
 	recordMemory: (id) => {
 		const { memories } = get();
@@ -111,6 +115,8 @@ var useGameStore = create()(persist((set, get) => ({
 			...initial,
 			nearMemory: false,
 			archiveOpen: false,
+			worldMapOpen: false,
+			currentRegion: "terraced-city",
 			justRecordedId: null
 		});
 		useGameStore.persist.clearStorage();
@@ -129,12 +135,7 @@ var useGameStore = create()(persist((set, get) => ({
 	})
 }));
 var MEMORY_ID = "terrace-hum-fragment-01";
-var MEMORY_ANCHOR = {
-	x: 1.7,
-	y: 0,
-	z: 4.2
-};
-var ZONE_NAME = "Terraced City";
+var ZONE_NAME = "Terraced City & World Regions";
 var CANON_LABEL = {
 	canon: "Canon",
 	interpretation: "Interpretation",
@@ -145,30 +146,122 @@ var RECORDS = [
 	{
 		id: MEMORY_ID,
 		title: "The chimney that sings",
-		body: "The chimneys of the Terraced City are functional, not ornamental. They are bound to the Hum, and that sound is part of how the city knows itself.",
+		body: "The chimneys of the Terraced City do not vent smoke; they draw aether, breathe air, warm houses, sing in harmony, and remember the names of the dead sung into them by grieving families.",
 		canonStatus: "canon",
-		zone: "terraced-city"
+		zone: "terraced-city",
+		position: {
+			x: 1.7,
+			y: 0,
+			z: 4.2
+		}
 	},
 	{
-		id: "terrace-greybox-layout",
-		title: "Courtyard reading",
-		body: "The walkable courtyard, ramp and block masses are a gameplay picture of the terraces. They are not a measured plan from the novels.",
-		canonStatus: "interpretation",
-		zone: "terraced-city"
+		id: "quarry-basalt-seam",
+		title: "The Great Quarry and Stone",
+		body: "At the great quarry above the city, master mason Kesi taught Asha that every stone carries the shape of the block it is willing to become. You do not cut it; you ask.",
+		canonStatus: "canon",
+		zone: "the-quarry",
+		position: {
+			x: -14,
+			y: 0,
+			z: -10
+		}
 	},
 	{
-		id: "memory-record-act",
-		title: "Recording a fragment",
-		body: "Keeping a fragment on your person is a game action. The novels do not describe this archive.",
-		canonStatus: "expansion",
-		zone: "terraced-city"
+		id: "council-ring-totems",
+		title: "The Council Ring and Totems",
+		body: "Carved from a single outcrop of sandstone and black basalt, the Council Ring holds twenty-four Custodians and Queen Nefret, keeping the seven ancient totems and the seed of light.",
+		canonStatus: "canon",
+		zone: "council-ring",
+		position: {
+			x: 14,
+			y: 0,
+			z: -10
+		}
 	},
 	{
-		id: "operation-legacy",
-		title: "Operation Legacy",
-		body: "As empires withdrew, colonial administrations destroyed and concealed official records. This note belongs to the nonfiction companion. It is not part of the city's cosmology.",
+		id: "pelan-island-Elohim",
+		title: "Pelan Island and the Elohim",
+		body: "East across warm waters lies Pelan, where Yakub and the sixty thousand Elohim gently tuned the folded light in the blood across generations, birthing new peoples.",
+		canonStatus: "canon",
+		zone: "pelan-island",
+		position: {
+			x: 24,
+			y: 0,
+			z: 14
+		}
+	},
+	{
+		id: "ice-wall-vault",
+		title: "The Ice Wall and the Sealed Vault",
+		body: "Beyond the southern sea rises the endless Ice Wall. Through its gap lies the Ancestral Republic, 178 dome-worlds under a sky membrane, and the Sealed Vault where the Architects stored seven thousand years of memory.",
+		canonStatus: "canon",
+		zone: "ice-wall",
+		position: {
+			x: 0,
+			y: 0,
+			z: -28
+		}
+	},
+	{
+		id: "mojako-gate-return",
+		title: "The Mojako Gate and the Mercy Years",
+		body: "Deep beneath the foundations lies the Mojako Gate, opening only for the forgotten. In 1914 a bell struck a hundred-year mercy period, bringing the return of the Hum through every child born.",
+		canonStatus: "canon",
+		zone: "mojako-gate",
+		position: {
+			x: 0,
+			y: 0,
+			z: -18
+		}
+	},
+	{
+		id: "operation-legacy-vault",
+		title: "Operation Legacy & Hanslope Park",
+		body: "As colonies moved toward independence, the British Colonial Office ran Operation Legacy to destroy or hide records that might embarrass the empire. 8,800 files sat hidden at Hanslope Park for fifty years until Kenyan survivors sued in 2011.",
 		canonStatus: "documented_history",
-		zone: "companion"
+		zone: "companion",
+		position: {
+			x: -6,
+			y: 0,
+			z: 10
+		}
+	},
+	{
+		id: "great-zimbabwe-mapungubwe",
+		title: "Great Zimbabwe & Mapungubwe",
+		body: "Great Zimbabwe's granite walls and Mapungubwe's Golden Rhino stand as monuments to precolonial African civilization, long misattributed by colonial visitors before UNESCO and modern archaeology confirmed their African origin.",
+		canonStatus: "documented_history",
+		zone: "companion",
+		position: {
+			x: 8,
+			y: 0,
+			z: 14
+		}
+	},
+	{
+		id: "timbuktu-manuscripts",
+		title: "Timbuktu Manuscripts & Abdel Kader Haidara",
+		body: "During the 2012 occupation of northern Mali, librarian Abdel Kader Haidara and local families smuggled over 4,000 ancient manuscripts south to Bamako in metal boxes hidden under fruit and vegetables along the Niger.",
+		canonStatus: "documented_history",
+		zone: "companion",
+		position: {
+			x: -12,
+			y: 0,
+			z: 4
+		}
+	},
+	{
+		id: "benin-bronzes",
+		title: "Benin Bronzes, 1897",
+		body: "Sacked during the 1897 British punitive expedition, thousands of cast brass plaques from the Royal Palace of Benin were scattered to global museums. Restitution efforts are returning ownership to the Oba of Benin.",
+		canonStatus: "documented_history",
+		zone: "companion",
+		position: {
+			x: 12,
+			y: 0,
+			z: 6
+		}
 	}
 ];
 function recordById(id) {
@@ -520,7 +613,7 @@ function EntryScreen({ onStart }) {
 }
 var routes_exports = /* @__PURE__ */ __exportAll({ component: () => Home });
 var _jsxFileName = "/app/applet/src/routes/index.tsx?tsr-split=component";
-var Play = (0, import_react.lazy)(() => import("./Play-DbK8FIRe.mjs"));
+var Play = (0, import_react.lazy)(() => import("./Play-CVzyDNRT.mjs"));
 function Home() {
 	const [live, setLive] = (0, import_react.useState)(false);
 	if (!live) return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(EntryScreen, { onStart: () => setLive(true) }, void 0, false, {
@@ -545,4 +638,4 @@ function Home() {
 		columnNumber: 10
 	}, this);
 }
-export { WORLD as a, MEMORY_ANCHOR as c, ZONE_NAME as d, recordById as f, setHumLevel as h, SKINS as i, MEMORY_ID as l, chime as m, Settling as n, CANON_LABEL as o, useGameStore as p, CLOTHS as r, COMPANION_SHELF as s, routes_exports as t, PLACE_NOTES as u };
+export { WORLD as a, MEMORY_ID as c, ZONE_NAME as d, recordById as f, setHumLevel as h, SKINS as i, PLACE_NOTES as l, chime as m, Settling as n, CANON_LABEL as o, useGameStore as p, CLOTHS as r, COMPANION_SHELF as s, routes_exports as t, RECORDS as u };

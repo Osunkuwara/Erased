@@ -2,7 +2,7 @@ import { i as __toESM } from "../_runtime.mjs";
 import { y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
 import { n as persist, r as create, t as createJSONStorage } from "../_libs/zustand.mjs";
 import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
-// node_modules/.nitro/vite/services/ssr/assets/routes-4hLiTYmq.js
+// node_modules/.nitro/vite/services/ssr/assets/routes-BlMQL_h8.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_dev_runtime = require_jsx_dev_runtime();
 var __defProp = Object.defineProperty;
@@ -88,6 +88,8 @@ var useGameStore = create()(persist((set, get) => ({
 	...initial,
 	nearMemory: false,
 	archiveOpen: false,
+	worldMapOpen: false,
+	currentRegion: "terraced-city",
 	justRecordedId: null,
 	setPlayerName: (playerName) => set({ playerName }),
 	setCameraMode: (cameraMode) => set({ cameraMode }),
@@ -95,6 +97,8 @@ var useGameStore = create()(persist((set, get) => ({
 	setAvatar: (avatar) => set({ avatar }),
 	setNearMemory: (nearMemory) => set({ nearMemory }),
 	setArchiveOpen: (archiveOpen) => set({ archiveOpen }),
+	setWorldMapOpen: (worldMapOpen) => set({ worldMapOpen }),
+	setCurrentRegion: (currentRegion) => set({ currentRegion }),
 	setMuted: (muted) => set({ muted }),
 	recordMemory: (id) => {
 		const { memories } = get();
@@ -111,6 +115,8 @@ var useGameStore = create()(persist((set, get) => ({
 			...initial,
 			nearMemory: false,
 			archiveOpen: false,
+			worldMapOpen: false,
+			currentRegion: "terraced-city",
 			justRecordedId: null
 		});
 		useGameStore.persist.clearStorage();
@@ -607,7 +613,7 @@ function EntryScreen({ onStart }) {
 }
 var routes_exports = /* @__PURE__ */ __exportAll({ component: () => Home });
 var _jsxFileName = "/app/applet/src/routes/index.tsx?tsr-split=component";
-var Play = (0, import_react.lazy)(() => import("./Play-QtIQwa1p.mjs"));
+var Play = (0, import_react.lazy)(() => import("./Play-CL8McJ5s.mjs"));
 function Home() {
 	const [live, setLive] = (0, import_react.useState)(false);
 	if (!live) return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(EntryScreen, { onStart: () => setLive(true) }, void 0, false, {

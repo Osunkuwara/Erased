@@ -1,10 +1,10 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { a as WORLD, c as MEMORY_ID, d as ZONE_NAME, f as recordById, h as setHumLevel, i as SKINS, l as PLACE_NOTES, m as chime, n as Settling, o as CANON_LABEL, p as useGameStore, r as CLOTHS, s as COMPANION_SHELF, u as RECORDS } from "./routes-4hLiTYmq.mjs";
+import { a as WORLD, c as MEMORY_ID, d as ZONE_NAME, f as recordById, h as setHumLevel, i as SKINS, l as PLACE_NOTES, m as chime, n as Settling, o as CANON_LABEL, p as useGameStore, r as CLOTHS, s as COMPANION_SHELF, u as RECORDS } from "./routes-CPhIB9KC.mjs";
 import { _ as Vector3, g as RepeatWrapping, l as CanvasTexture, n as useFrame, t as Canvas, y as require_react } from "../_libs/@react-three/fiber+[...].mjs";
 import { a as useRapier, i as RigidBody, n as CuboidCollider, r as Physics, t as CapsuleCollider } from "../_libs/@react-three/rapier+[...].mjs";
 import { t as require_jsx_dev_runtime } from "../_libs/react.mjs";
-import { a as Camera, n as VolumeX, o as BookOpen, r as Volume2, t as X } from "../_libs/lucide-react.mjs";
-// node_modules/.nitro/vite/services/ssr/assets/Play-QtIQwa1p.js
+import { a as MapPin, c as Camera, l as BookOpen, n as VolumeX, o as Globe, r as Volume2, s as Compass, t as X } from "../_libs/lucide-react.mjs";
+// node_modules/.nitro/vite/services/ssr/assets/Play-CVzyDNRT.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_dev_runtime = require_jsx_dev_runtime();
 var GAME_KEYS = /* @__PURE__ */ new Set([
@@ -492,7 +492,7 @@ var PALMS = [
 function dampAngle(current, target, lambda, dt) {
 	return current + Math.atan2(Math.sin(target - current), Math.cos(target - current)) * (1 - Math.exp(-lambda * dt));
 }
-var _jsxFileName$4 = "/app/applet/src/game/Player.tsx";
+var _jsxFileName$5 = "/app/applet/src/game/Player.tsx";
 var WALK = 4.6;
 var RUN = 7.6;
 var INTERACT_RADIUS = 3.2;
@@ -710,7 +710,7 @@ function Player({ onReady }) {
 			publishProbe();
 			published.current = true;
 		}
-		writeProbe(bodyYaw.current, moving ? speed : 0, nx, ny, nz, near);
+		writeProbe(bodyYaw.current, moving ? speed : 0, nx, ny, nz, isNearAny);
 		if (!readySent.current) {
 			readySent.current = true;
 			onReady();
@@ -719,6 +719,7 @@ function Player({ onReady }) {
 	const avatar = useGameStore((s) => s.avatar);
 	const skin = SKINS[avatar.skin];
 	const cloth = CLOTHS[avatar.cloth];
+	const nearMemory = useGameStore((s) => s.nearMemory);
 	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(RigidBody, {
 		ref: body,
 		type: "kinematicPosition",
@@ -734,8 +735,8 @@ function Player({ onReady }) {
 			false
 		],
 		children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(CapsuleCollider, { args: [.4, .28] }, void 0, false, {
-			fileName: _jsxFileName$4,
-			lineNumber: 273,
+			fileName: _jsxFileName$5,
+			lineNumber: 274,
 			columnNumber: 7
 		}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("group", {
 			ref: visual,
@@ -749,162 +750,523 @@ function Player({ onReady }) {
 					],
 					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("capsuleGeometry", { args: [
 						.28,
-						.78,
-						6,
-						10
+						.76,
+						8,
+						12
 					] }, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 276,
+						fileName: _jsxFileName$5,
+						lineNumber: 278,
 						columnNumber: 11
 					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 						color: cloth,
-						roughness: .78
+						roughness: .78,
+						metalness: .08
 					}, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 277,
+						fileName: _jsxFileName$5,
+						lineNumber: 279,
 						columnNumber: 11
 					}, this)]
 				}, void 0, true, {
-					fileName: _jsxFileName$4,
-					lineNumber: 275,
+					fileName: _jsxFileName$5,
+					lineNumber: 277,
 					columnNumber: 9
 				}, this),
 				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
-					castShadow: true,
 					position: [
-						.32,
-						.12,
+						0,
+						.38,
 						0
 					],
-					rotation: [
-						0,
-						0,
-						.18
-					],
-					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("capsuleGeometry", { args: [
-						.07,
-						.36,
-						4,
-						8
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("cylinderGeometry", { args: [
+						.22,
+						.25,
+						.08,
+						12
 					] }, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 280,
-						columnNumber: 11
-					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
-						color: skin,
-						roughness: .7
-					}, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 281,
-						columnNumber: 11
-					}, this)]
-				}, void 0, true, {
-					fileName: _jsxFileName$4,
-					lineNumber: 279,
-					columnNumber: 9
-				}, this),
-				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
-					castShadow: true,
-					position: [
-						-.32,
-						.12,
-						0
-					],
-					rotation: [
-						0,
-						0,
-						-.18
-					],
-					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("capsuleGeometry", { args: [
-						.07,
-						.36,
-						4,
-						8
-					] }, void 0, false, {
-						fileName: _jsxFileName$4,
+						fileName: _jsxFileName$5,
 						lineNumber: 284,
 						columnNumber: 11
 					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
-						color: skin,
-						roughness: .7
+						color: WORLD.gem,
+						roughness: .5,
+						metalness: .3
 					}, void 0, false, {
-						fileName: _jsxFileName$4,
+						fileName: _jsxFileName$5,
 						lineNumber: 285,
 						columnNumber: 11
 					}, this)]
 				}, void 0, true, {
-					fileName: _jsxFileName$4,
+					fileName: _jsxFileName$5,
 					lineNumber: 283,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						0,
+						-.05,
+						0
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("cylinderGeometry", { args: [
+						.29,
+						.29,
+						.1,
+						12
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 290,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: WORLD.dark,
+						roughness: .6
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 291,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 289,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						0,
+						-.05,
+						.28
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.1,
+						.08,
+						.05
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 294,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: WORLD.copper,
+						roughness: .4,
+						metalness: .6
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 295,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 293,
 					columnNumber: 9
 				}, this),
 				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
 					castShadow: true,
 					position: [
 						0,
-						.62,
-						0
+						.05,
+						-.18
 					],
-					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("sphereGeometry", { args: [
-						.2,
-						16,
-						14
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.32,
+						.38,
+						.2
 					] }, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 288,
+						fileName: _jsxFileName$5,
+						lineNumber: 300,
 						columnNumber: 11
 					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
-						color: skin,
-						roughness: .62
+						color: WORLD.trunk,
+						roughness: .8
 					}, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 289,
+						fileName: _jsxFileName$5,
+						lineNumber: 301,
 						columnNumber: 11
 					}, this)]
 				}, void 0, true, {
-					fileName: _jsxFileName$4,
-					lineNumber: 287,
+					fileName: _jsxFileName$5,
+					lineNumber: 299,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("group", {
+					position: [
+						.34,
+						.08,
+						0
+					],
+					rotation: [
+						0,
+						0,
+						.12
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+						castShadow: true,
+						position: [
+							0,
+							-.1,
+							0
+						],
+						children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("capsuleGeometry", { args: [
+							.07,
+							.4,
+							6,
+							8
+						] }, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 307,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+							color: cloth,
+							roughness: .75
+						}, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 308,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName$5,
+						lineNumber: 306,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+						castShadow: true,
+						position: [
+							0,
+							-.32,
+							0
+						],
+						children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("sphereGeometry", { args: [
+							.07,
+							8,
+							8
+						] }, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 311,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+							color: skin,
+							roughness: .7
+						}, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 312,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName$5,
+						lineNumber: 310,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 305,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("group", {
+					position: [
+						-.34,
+						.08,
+						0
+					],
+					rotation: [
+						0,
+						0,
+						-.12
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+						castShadow: true,
+						position: [
+							0,
+							-.1,
+							0
+						],
+						children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("capsuleGeometry", { args: [
+							.07,
+							.4,
+							6,
+							8
+						] }, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 319,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+							color: cloth,
+							roughness: .75
+						}, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 320,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName$5,
+						lineNumber: 318,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+						castShadow: true,
+						position: [
+							0,
+							-.32,
+							0
+						],
+						children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("sphereGeometry", { args: [
+							.07,
+							8,
+							8
+						] }, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 323,
+							columnNumber: 13
+						}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+							color: skin,
+							roughness: .7
+						}, void 0, false, {
+							fileName: _jsxFileName$5,
+							lineNumber: 324,
+							columnNumber: 13
+						}, this)]
+					}, void 0, true, {
+						fileName: _jsxFileName$5,
+						lineNumber: 322,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 317,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					castShadow: true,
+					position: [
+						0,
+						.64,
+						0
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("sphereGeometry", { args: [
+						.21,
+						18,
+						16
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 330,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: skin,
+						roughness: .65
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 331,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 329,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					castShadow: true,
+					position: [
+						0,
+						.74,
+						-.04
+					],
+					rotation: [
+						.2,
+						0,
+						0
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("sphereGeometry", { args: [
+						.22,
+						16,
+						12,
+						0,
+						Math.PI * 2,
+						0,
+						Math.PI * .6
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 336,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: cloth,
+						roughness: .8
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 337,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 335,
 					columnNumber: 9
 				}, this),
 				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
 					position: [
-						0,
-						.64,
-						.16
+						.07,
+						.66,
+						.18
 					],
 					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
-						.07,
-						.045,
-						.06
+						.04,
+						.03,
+						.04
 					] }, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 292,
+						fileName: _jsxFileName$5,
+						lineNumber: 342,
 						columnNumber: 11
 					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 						color: WORLD.skinDeep,
 						roughness: .5
 					}, void 0, false, {
-						fileName: _jsxFileName$4,
-						lineNumber: 293,
+						fileName: _jsxFileName$5,
+						lineNumber: 343,
 						columnNumber: 11
 					}, this)]
 				}, void 0, true, {
-					fileName: _jsxFileName$4,
-					lineNumber: 291,
+					fileName: _jsxFileName$5,
+					lineNumber: 341,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						-.07,
+						.66,
+						.18
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.04,
+						.03,
+						.04
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 346,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: WORLD.skinDeep,
+						roughness: .5
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 347,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 345,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						0,
+						.62,
+						.2
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.05,
+						.06,
+						.06
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 350,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: skin,
+						roughness: .6
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 351,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 349,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						0,
+						.22,
+						.16
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("octahedronGeometry", { args: [.06] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 356,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: nearMemory ? WORLD.gem : WORLD.copper,
+						emissive: nearMemory ? WORLD.gemEmissive : "#000000",
+						emissiveIntensity: nearMemory ? 1.2 : 0,
+						roughness: .2,
+						metalness: .8
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 357,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 355,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						.13,
+						-.46,
+						.04
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.12,
+						.14,
+						.18
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 368,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: WORLD.dark,
+						roughness: .85
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 369,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 367,
+					columnNumber: 9
+				}, this),
+				/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("mesh", {
+					position: [
+						-.13,
+						-.46,
+						.04
+					],
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: [
+						.12,
+						.14,
+						.18
+					] }, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 372,
+						columnNumber: 11
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
+						color: WORLD.dark,
+						roughness: .85
+					}, void 0, false, {
+						fileName: _jsxFileName$5,
+						lineNumber: 373,
+						columnNumber: 11
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$5,
+					lineNumber: 371,
 					columnNumber: 9
 				}, this)
 			]
 		}, void 0, true, {
-			fileName: _jsxFileName$4,
-			lineNumber: 274,
+			fileName: _jsxFileName$5,
+			lineNumber: 275,
 			columnNumber: 7
 		}, this)]
 	}, void 0, true, {
-		fileName: _jsxFileName$4,
-		lineNumber: 266,
+		fileName: _jsxFileName$5,
+		lineNumber: 267,
 		columnNumber: 5
 	}, this);
 }
-var _jsxFileName$3 = "/app/applet/src/game/World.tsx";
+var _jsxFileName$4 = "/app/applet/src/game/World.tsx";
 var BOX_COLOR = {
 	sand: WORLD.sand,
 	stone: WORLD.stone,
@@ -921,7 +1283,7 @@ function Stone({ position, size, color, rotation }) {
 			castShadow: true,
 			receiveShadow: true,
 			children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("boxGeometry", { args: size }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 23,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -929,17 +1291,17 @@ function Stone({ position, size, color, rotation }) {
 				roughness: .92,
 				metalness: .02
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 24,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 22,
 			columnNumber: 7
 		}, this)
 	}, void 0, false, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 21,
 		columnNumber: 5
 	}, this);
@@ -962,7 +1324,7 @@ function Chimney({ position, height }) {
 					0
 				]
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 33,
 				columnNumber: 7
 			}, this),
@@ -979,7 +1341,7 @@ function Chimney({ position, height }) {
 					height,
 					10
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 35,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -987,12 +1349,12 @@ function Chimney({ position, height }) {
 					metalness: .62,
 					roughness: .38
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 36,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 34,
 				columnNumber: 7
 			}, this),
@@ -1008,7 +1370,7 @@ function Chimney({ position, height }) {
 					.22,
 					10
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 39,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1018,12 +1380,12 @@ function Chimney({ position, height }) {
 					emissive: WORLD.gemEmissive,
 					emissiveIntensity: .4
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 40,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 38,
 				columnNumber: 7
 			}, this),
@@ -1038,13 +1400,13 @@ function Chimney({ position, height }) {
 				distance: 7,
 				decay: 2
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 48,
 				columnNumber: 7
 			}, this)
 		]
 	}, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 32,
 		columnNumber: 5
 	}, this);
@@ -1067,7 +1429,7 @@ function Palm({ position }) {
 					0
 				]
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 62,
 				columnNumber: 7
 			}, this),
@@ -1084,19 +1446,19 @@ function Palm({ position }) {
 					2.1,
 					6
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 64,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.trunk,
 					roughness: .9
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 65,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 63,
 				columnNumber: 7
 			}, this),
@@ -1112,19 +1474,19 @@ function Palm({ position }) {
 					8,
 					6
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 68,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.leaf,
 					roughness: .82
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 69,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 67,
 				columnNumber: 7
 			}, this),
@@ -1145,19 +1507,19 @@ function Palm({ position }) {
 					.85,
 					5
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 72,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.leaf,
 					roughness: .8
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 73,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 71,
 				columnNumber: 7
 			}, this),
@@ -1178,25 +1540,25 @@ function Palm({ position }) {
 					.8,
 					5
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 76,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.leaf,
 					roughness: .8
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 77,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 75,
 				columnNumber: 7
 			}, this)
 		]
 	}, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 61,
 		columnNumber: 5
 	}, this);
@@ -1229,7 +1591,7 @@ function MemoryGem({ id, position }) {
 			document.body.style.cursor = "";
 		},
 		children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("icosahedronGeometry", { args: [.36, 1] }, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 110,
 			columnNumber: 7
 		}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1239,12 +1601,12 @@ function MemoryGem({ id, position }) {
 			roughness: .35,
 			metalness: .2
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 111,
 			columnNumber: 7
 		}, this)]
 	}, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 95,
 		columnNumber: 5
 	}, this);
@@ -1267,24 +1629,24 @@ function WorldRegions() {
 					2.4,
 					8
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 128,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.stone,
 					roughness: .9
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 129,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 127,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 126,
 			columnNumber: 7
 		}, this),
@@ -1304,24 +1666,24 @@ function WorldRegions() {
 					1.2,
 					5
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 134,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.clay,
 					roughness: .88
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 135,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 133,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 132,
 			columnNumber: 7
 		}, this),
@@ -1342,24 +1704,24 @@ function WorldRegions() {
 					3,
 					16
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 142,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.dark,
 					roughness: .85
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 143,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 141,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 140,
 			columnNumber: 7
 		}, this),
@@ -1379,24 +1741,24 @@ function WorldRegions() {
 					1.6,
 					12
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 150,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 					color: WORLD.sand,
 					roughness: .9
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 151,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 149,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 148,
 			columnNumber: 7
 		}, this),
@@ -1416,7 +1778,7 @@ function WorldRegions() {
 					12,
 					4
 				] }, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 158,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1426,17 +1788,17 @@ function WorldRegions() {
 					emissive: "#48829c",
 					emissiveIntensity: .2
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 159,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 157,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 156,
 			columnNumber: 7
 		}, this),
@@ -1463,7 +1825,7 @@ function WorldRegions() {
 						0
 					]
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 165,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1471,22 +1833,22 @@ function WorldRegions() {
 					metalness: .8,
 					roughness: .2
 				}, void 0, false, {
-					fileName: _jsxFileName$3,
+					fileName: _jsxFileName$4,
 					lineNumber: 166,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 164,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 163,
 			columnNumber: 7
 		}, this)
 	] }, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 124,
 		columnNumber: 5
 	}, this);
@@ -1528,12 +1890,12 @@ function Ground() {
 				.5,
 				60
 			] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 200,
 				columnNumber: 9
 			}, this)
 		}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 199,
 			columnNumber: 7
 		}, this),
@@ -1550,7 +1912,7 @@ function Ground() {
 			],
 			receiveShadow: true,
 			children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("planeGeometry", { args: [120, 120] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 203,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1558,12 +1920,12 @@ function Ground() {
 				roughness: 1,
 				roughnessMap: texture ?? void 0
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 204,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 202,
 			columnNumber: 7
 		}, this),
@@ -1580,19 +1942,19 @@ function Ground() {
 			],
 			receiveShadow: true,
 			children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("planeGeometry", { args: [3.2, 12] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 207,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 				color: WORLD.groundAlt,
 				roughness: .95
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 208,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 206,
 			columnNumber: 7
 		}, this),
@@ -1608,7 +1970,7 @@ function Ground() {
 				3
 			],
 			children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("planeGeometry", { args: [1.15, 20] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 211,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1616,12 +1978,12 @@ function Ground() {
 				roughness: .22,
 				metalness: .18
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 212,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 210,
 			columnNumber: 7
 		}, this),
@@ -1638,19 +2000,19 @@ function Ground() {
 				.16,
 				16
 			] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 215,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
 				color: WORLD.dark,
 				roughness: .88
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 216,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 214,
 			columnNumber: 7
 		}, this),
@@ -1666,7 +2028,7 @@ function Ground() {
 				.06,
 				16
 			] }, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 219,
 				columnNumber: 9
 			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("meshStandardMaterial", {
@@ -1674,17 +2036,17 @@ function Ground() {
 				roughness: .2,
 				metalness: .2
 			}, void 0, false, {
-				fileName: _jsxFileName$3,
+				fileName: _jsxFileName$4,
 				lineNumber: 220,
 				columnNumber: 9
 			}, this)]
 		}, void 0, true, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 218,
 			columnNumber: 7
 		}, this)
 	] }, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 198,
 		columnNumber: 5
 	}, this);
@@ -1735,16 +2097,16 @@ function Bounds() {
 			wall[4],
 			wall[5]
 		] }, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 237,
 			columnNumber: 11
 		}, this)
 	}, wall.join(","), false, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 236,
 		columnNumber: 9
 	}, this)) }, void 0, false, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 234,
 		columnNumber: 5
 	}, this);
@@ -1753,32 +2115,32 @@ function World() {
 	const memoryRecords = (0, import_react.useMemo)(() => RECORDS.filter((r) => r.position), []);
 	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Ground, {}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 249,
 			columnNumber: 7
 		}, this),
 		/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Bounds, {}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 250,
 			columnNumber: 7
 		}, this),
 		/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(WorldRegions, {}, void 0, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 251,
 			columnNumber: 7
 		}, this),
 		BOXES.map((box) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Stone, { ...box }, box.position.join(":") + box.size.join("x"), false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 253,
 			columnNumber: 9
 		}, this)),
 		CHIMNEYS.map((chimney) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Chimney, { ...chimney }, chimney.position.join(":"), false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 256,
 			columnNumber: 9
 		}, this)),
 		PALMS.map((position) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Palm, { position }, position.join(":"), false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 259,
 			columnNumber: 9
 		}, this)),
@@ -1786,24 +2148,24 @@ function World() {
 			id: record.id,
 			position: record.position
 		}, record.id, false, {
-			fileName: _jsxFileName$3,
+			fileName: _jsxFileName$4,
 			lineNumber: 262,
 			columnNumber: 9
 		}, this))
 	] }, void 0, true, {
-		fileName: _jsxFileName$3,
+		fileName: _jsxFileName$4,
 		lineNumber: 248,
 		columnNumber: 5
 	}, this);
 }
-var _jsxFileName$2 = "/app/applet/src/game/Scene.tsx";
+var _jsxFileName$3 = "/app/applet/src/game/Scene.tsx";
 function Scene({ onReady }) {
 	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(import_jsx_dev_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("color", {
 			attach: "background",
 			args: [WORLD.sky]
 		}, void 0, false, {
-			fileName: _jsxFileName$2,
+			fileName: _jsxFileName$3,
 			lineNumber: 14,
 			columnNumber: 7
 		}, this),
@@ -1815,7 +2177,7 @@ function Scene({ onReady }) {
 				52
 			]
 		}, void 0, false, {
-			fileName: _jsxFileName$2,
+			fileName: _jsxFileName$3,
 			lineNumber: 15,
 			columnNumber: 7
 		}, this),
@@ -1824,12 +2186,12 @@ function Scene({ onReady }) {
 			"#6b4a32",
 			.55
 		] }, void 0, false, {
-			fileName: _jsxFileName$2,
+			fileName: _jsxFileName$3,
 			lineNumber: 16,
 			columnNumber: 7
 		}, this),
 		/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("ambientLight", { intensity: .28 }, void 0, false, {
-			fileName: _jsxFileName$2,
+			fileName: _jsxFileName$3,
 			lineNumber: 17,
 			columnNumber: 7
 		}, this),
@@ -1852,7 +2214,7 @@ function Scene({ onReady }) {
 			"shadow-camera-bottom": -22,
 			"shadow-bias": -6e-4
 		}, void 0, false, {
-			fileName: _jsxFileName$2,
+			fileName: _jsxFileName$3,
 			lineNumber: 18,
 			columnNumber: 7
 		}, this),
@@ -1865,27 +2227,369 @@ function Scene({ onReady }) {
 					0
 				],
 				children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(World, {}, void 0, false, {
-					fileName: _jsxFileName$2,
+					fileName: _jsxFileName$3,
 					lineNumber: 35,
 					columnNumber: 11
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Player, { onReady }, void 0, false, {
+					fileName: _jsxFileName$3,
+					lineNumber: 36,
+					columnNumber: 11
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName$3,
+				lineNumber: 34,
+				columnNumber: 9
+			}, this)
+		}, void 0, false, {
+			fileName: _jsxFileName$3,
+			lineNumber: 33,
+			columnNumber: 7
+		}, this)
+	] }, void 0, true, {
+		fileName: _jsxFileName$3,
+		lineNumber: 13,
+		columnNumber: 5
+	}, this);
+}
+var WORLD_REGIONS = [
+	{
+		id: "terraced-city",
+		name: "The Terraced City",
+		subtitle: "Region 1 — The Starting Settlement",
+		description: "Layered pale stone terraces, sandstone residences, ancient water channels, and copper-capped chimneys that sing in harmony with the Hum.",
+		atmosphere: "Red savanna warmth, drifting sandstone dust, resonant aether hum.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 0,
+			y: 1.35,
+			z: 9
+		},
+		unlockedByDefault: true
+	},
+	{
+		id: "the-quarry",
+		name: "The Quarry",
+		subtitle: "Region 2 — The Stone Seams",
+		description: "Where master masons learned that every stone carries the shape of the block it is willing to become.",
+		atmosphere: "Massive granite outcrops, echoes of chisel and song.",
+		canonStatus: "canon",
+		coordinates: {
+			x: -14,
+			y: .5,
+			z: -10
+		},
+		unlockedByDefault: true
+	},
+	{
+		id: "council-ring",
+		name: "Council Ring & House of Remembering",
+		subtitle: "Region 3 — The Custodians",
+		description: "Carved from a single outcrop of sandstone and black basalt, holding twenty-four Custodians and Queen Nefret.",
+		atmosphere: "Solemn quiet, torch-lit monoliths, ancient totems.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 14,
+			y: .5,
+			z: -10
+		},
+		unlockedByDefault: true
+	},
+	{
+		id: "pelan-island",
+		name: "Pelan Island",
+		subtitle: "Region 4 — The Cradle of Light",
+		description: "Warm coastal waters where Yakub and the sixty thousand Elohim gently tuned the folded light in the blood.",
+		atmosphere: "Ocean breeze, white sand beaches, volcanic stone springs.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 24,
+			y: .5,
+			z: 14
+		},
+		unlockedByDefault: true
+	},
+	{
+		id: "ice-wall",
+		name: "The Ice Wall & Rim",
+		subtitle: "Region 5 — The Great Boundary",
+		description: "A monumental wall of glacial blue ice guarding the outer rim and the threshold to the dome-worlds.",
+		atmosphere: "Howling polar winds, crystalline blue fractures, monumental scale.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 0,
+			y: .5,
+			z: -28
+		},
+		unlockedByDefault: true
+	},
+	{
+		id: "ancestral-republic",
+		name: "The Ancestral Republic",
+		subtitle: "Region 6 — The Dome Worlds",
+		description: "One hundred and seventy-eight enclosed dome-worlds under a shimmering sky membrane, preserving ancient civilisation.",
+		atmosphere: "Polished black basalt, silver domes, silent technological majesty.",
+		canonStatus: "canon",
+		coordinates: {
+			x: -22,
+			y: .5,
+			z: -22
+		},
+		unlockedByDefault: false
+	},
+	{
+		id: "sealed-vault",
+		name: "The Sealed Vault",
+		subtitle: "Region 7 — Seven Thousand Years",
+		description: "Monumental subterranean chamber containing seven millennia of uncorrupted historical records and artifact caches.",
+		atmosphere: "Echoing metallic seals, amber illumination, absolute stillness.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 22,
+			y: .5,
+			z: -22
+		},
+		unlockedByDefault: false
+	},
+	{
+		id: "great-tree",
+		name: "The Great Tree & Lemuria",
+		subtitle: "Region 8 — The World Roots",
+		description: "Colossal ebony root networks connecting ancient worlds, associated with Asgard and the earliest botanical archives.",
+		atmosphere: "Deep forest shadow, glowing fungal phosphorescence, towering canopy.",
+		canonStatus: "canon",
+		coordinates: {
+			x: -26,
+			y: .5,
+			z: 18
+		},
+		unlockedByDefault: false
+	},
+	{
+		id: "mojako-gate",
+		name: "The Mojako Gate & The Ditoro",
+		subtitle: "Region 9 — The River of Time",
+		description: "Engraved black-stone gate opening only for the forgotten into the dreamtime and the flowing river of time.",
+		atmosphere: "Temporal stillness, resonant bronze bells, starlit void.",
+		canonStatus: "canon",
+		coordinates: {
+			x: 0,
+			y: .5,
+			z: -18
+		},
+		unlockedByDefault: true
+	}
+];
+var _jsxFileName$2 = "/app/applet/src/game/ui/WorldMapModal.tsx";
+function WorldMapModal({ isOpen, onClose, onTravel }) {
+	const memories = useGameStore((s) => s.memories);
+	if (!isOpen) return null;
+	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+		className: "pointer-events-auto absolute inset-0 z-30 flex items-center justify-center bg-bg/85 p-4 sm:p-6",
+		"data-ui": true,
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-labelledby": "world-map-title",
+		children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+			className: "flex max-h-[90dvh] w-full max-w-4xl flex-col rounded-xl border border-border bg-surface shadow-2xl overflow-hidden",
+			children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+				className: "flex items-center justify-between border-b border-border px-6 py-4",
+				children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Globe, { className: "size-6 text-accent" }, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 28,
+						columnNumber: 13
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
+						className: "text-xs tracking-widest text-accent uppercase",
+						children: "Global Navigation"
+					}, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 30,
+						columnNumber: 15
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", {
+						id: "world-map-title",
+						className: "font-display text-2xl leading-none text-fg sm:text-3xl",
+						children: "World Map & Regions"
+					}, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 31,
+						columnNumber: 15
+					}, this)] }, void 0, true, {
+						fileName: _jsxFileName$2,
+						lineNumber: 29,
+						columnNumber: 13
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$2,
+					lineNumber: 27,
+					columnNumber: 11
+				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
+					type: "button",
+					className: "flex size-11 items-center justify-center rounded-lg border border-border bg-bg text-fg hover:border-accent",
+					onClick: onClose,
+					"aria-label": "Close world map",
+					children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(X, { className: "size-5" }, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 42,
+						columnNumber: 13
+					}, this)
+				}, void 0, false, {
 					fileName: _jsxFileName$2,
 					lineNumber: 36,
 					columnNumber: 11
 				}, this)]
 			}, void 0, true, {
 				fileName: _jsxFileName$2,
-				lineNumber: 34,
+				lineNumber: 26,
 				columnNumber: 9
-			}, this)
-		}, void 0, false, {
+			}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+				className: "grid flex-1 grid-cols-1 gap-6 overflow-y-auto p-6 lg:grid-cols-2",
+				children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+					className: "flex flex-col gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
+						className: "text-sm font-medium text-muted",
+						children: "Select a territory to inspect or travel:"
+					}, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 50,
+						columnNumber: 13
+					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+						className: "flex flex-col gap-2.5",
+						children: WORLD_REGIONS.map((region) => {
+							const isUnlocked = region.unlockedByDefault || memories.length >= 2;
+							return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
+								type: "button",
+								onClick: () => {
+									if (isUnlocked) {
+										onTravel(region);
+										onClose();
+									}
+								},
+								disabled: !isUnlocked,
+								className: `flex items-start justify-between gap-3 rounded-lg border p-4 text-left transition-all ${isUnlocked ? "border-border bg-bg hover:border-accent hover:bg-surface cursor-pointer" : "border-border/40 bg-bg/40 opacity-50 cursor-not-allowed"}`,
+								children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+									className: "flex items-start gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(MapPin, { className: `mt-0.5 size-5 shrink-0 ${isUnlocked ? "text-accent" : "text-muted"}` }, void 0, false, {
+										fileName: _jsxFileName$2,
+										lineNumber: 72,
+										columnNumber: 23
+									}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", {
+										className: "font-medium text-fg",
+										children: region.name
+									}, void 0, false, {
+										fileName: _jsxFileName$2,
+										lineNumber: 74,
+										columnNumber: 25
+									}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
+										className: "text-xs text-muted",
+										children: region.subtitle
+									}, void 0, false, {
+										fileName: _jsxFileName$2,
+										lineNumber: 75,
+										columnNumber: 25
+									}, this)] }, void 0, true, {
+										fileName: _jsxFileName$2,
+										lineNumber: 73,
+										columnNumber: 23
+									}, this)]
+								}, void 0, true, {
+									fileName: _jsxFileName$2,
+									lineNumber: 71,
+									columnNumber: 21
+								}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
+									className: "rounded border border-border px-2 py-0.5 text-xs text-accent",
+									children: isUnlocked ? "Discovered" : "Locked"
+								}, void 0, false, {
+									fileName: _jsxFileName$2,
+									lineNumber: 78,
+									columnNumber: 21
+								}, this)]
+							}, region.id, true, {
+								fileName: _jsxFileName$2,
+								lineNumber: 55,
+								columnNumber: 19
+							}, this);
+						})
+					}, void 0, false, {
+						fileName: _jsxFileName$2,
+						lineNumber: 51,
+						columnNumber: 13
+					}, this)]
+				}, void 0, true, {
+					fileName: _jsxFileName$2,
+					lineNumber: 49,
+					columnNumber: 11
+				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+					className: "flex flex-col gap-4 rounded-xl border border-border bg-bg p-6",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+							className: "flex items-center gap-2 text-accent",
+							children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Compass, { className: "size-5" }, void 0, false, {
+								fileName: _jsxFileName$2,
+								lineNumber: 90,
+								columnNumber: 15
+							}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h3", {
+								className: "font-medium text-fg",
+								children: "Territorial Codex"
+							}, void 0, false, {
+								fileName: _jsxFileName$2,
+								lineNumber: 91,
+								columnNumber: 15
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName$2,
+							lineNumber: 89,
+							columnNumber: 13
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
+							className: "text-sm leading-relaxed text-muted",
+							children: "N8G: THE ERASED spans multiple continents, ancient settlements, and monumental boundaries established across seven canonical manuscripts and documented historical records."
+						}, void 0, false, {
+							fileName: _jsxFileName$2,
+							lineNumber: 93,
+							columnNumber: 13
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
+							className: "rounded-lg border border-border bg-surface p-4",
+							children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h4", {
+								className: "mb-1 font-medium text-fg",
+								children: "Exploration Advisory"
+							}, void 0, false, {
+								fileName: _jsxFileName$2,
+								lineNumber: 97,
+								columnNumber: 15
+							}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
+								className: "text-xs leading-relaxed text-muted",
+								children: "Traverse walkable ancient pathways, ride water channels, or use global telemetry to reposition across regions instantly. Discover memory fragments in each territory to unlock remote transit nodes."
+							}, void 0, false, {
+								fileName: _jsxFileName$2,
+								lineNumber: 98,
+								columnNumber: 15
+							}, this)]
+						}, void 0, true, {
+							fileName: _jsxFileName$2,
+							lineNumber: 96,
+							columnNumber: 13
+						}, this)
+					]
+				}, void 0, true, {
+					fileName: _jsxFileName$2,
+					lineNumber: 88,
+					columnNumber: 11
+				}, this)]
+			}, void 0, true, {
+				fileName: _jsxFileName$2,
+				lineNumber: 47,
+				columnNumber: 9
+			}, this)]
+		}, void 0, true, {
 			fileName: _jsxFileName$2,
-			lineNumber: 33,
+			lineNumber: 24,
 			columnNumber: 7
 		}, this)
-	] }, void 0, true, {
+	}, void 0, false, {
 		fileName: _jsxFileName$2,
-		lineNumber: 13,
+		lineNumber: 17,
 		columnNumber: 5
 	}, this);
 }
@@ -1943,8 +2647,9 @@ function Joystick() {
 	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 		ref: pad,
 		"data-ui": true,
-		className: "relative size-32 rounded-full border border-border bg-surface/80",
+		className: "relative size-32 rounded-full border border-border bg-surface/80 touch-none select-none",
 		onPointerDown: (event) => {
+			event.preventDefault();
 			try {
 				event.currentTarget.setPointerCapture(event.pointerId);
 			} catch {}
@@ -1952,10 +2657,12 @@ function Joystick() {
 			place(event);
 		},
 		onPointerMove: (event) => {
+			event.preventDefault();
 			if (pointer.current !== event.pointerId) return;
 			place(event);
 		},
 		onPointerUp: (event) => {
+			event.preventDefault();
 			if (pointer.current !== event.pointerId) return;
 			resetJoystick(event);
 		},
@@ -1966,16 +2673,16 @@ function Joystick() {
 			resetJoystick(event);
 		},
 		children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
-			className: "absolute top-1/2 left-1/2 size-12 rounded-full bg-accent",
+			className: "absolute top-1/2 left-1/2 size-12 rounded-full bg-accent pointer-events-none",
 			style: { transform: `translate(calc(-50% + ${knob.x * 36}px), calc(-50% + ${knob.y * 36}px))` }
 		}, void 0, false, {
 			fileName: _jsxFileName$1,
-			lineNumber: 90,
+			lineNumber: 94,
 			columnNumber: 7
 		}, this)
 	}, void 0, false, {
 		fileName: _jsxFileName$1,
-		lineNumber: 62,
+		lineNumber: 63,
 		columnNumber: 5
 	}, this);
 }
@@ -1999,7 +2706,7 @@ function HoldButton({ label, hold, disabled, onPress }) {
 		type: "button",
 		"data-ui": true,
 		disabled,
-		className: "min-h-14 min-w-14 rounded-full border border-border bg-surface px-4 text-sm font-medium text-fg disabled:opacity-40",
+		className: "min-h-14 min-w-14 rounded-full border border-border bg-surface px-4 text-sm font-medium text-fg disabled:opacity-40 touch-none select-none",
 		onPointerDown: (event) => {
 			event.preventDefault();
 			try {
@@ -2016,7 +2723,7 @@ function HoldButton({ label, hold, disabled, onPress }) {
 		children: label
 	}, void 0, false, {
 		fileName: _jsxFileName$1,
-		lineNumber: 134,
+		lineNumber: 138,
 		columnNumber: 5
 	}, this);
 }
@@ -2026,7 +2733,7 @@ function Badge({ status }) {
 		children: CANON_LABEL[status]
 	}, void 0, false, {
 		fileName: _jsxFileName$1,
-		lineNumber: 162,
+		lineNumber: 166,
 		columnNumber: 5
 	}, this);
 }
@@ -2038,6 +2745,9 @@ function Hud({ onLeave }) {
 	const memories = useGameStore((s) => s.memories);
 	const archiveOpen = useGameStore((s) => s.archiveOpen);
 	const setArchiveOpen = useGameStore((s) => s.setArchiveOpen);
+	const worldMapOpen = useGameStore((s) => s.worldMapOpen);
+	const setWorldMapOpen = useGameStore((s) => s.setWorldMapOpen);
+	const setCurrentRegion = useGameStore((s) => s.setCurrentRegion);
 	const muted = useGameStore((s) => s.muted);
 	const setMuted = useGameStore((s) => s.setMuted);
 	const justRecordedId = useGameStore((s) => s.justRecordedId);
@@ -2052,11 +2762,18 @@ function Hud({ onLeave }) {
 		const down = (event) => {
 			if (event.repeat) return;
 			if (event.code === "KeyC") toggleCamera();
-			if (event.code === "Escape") setArchiveOpen(false);
+			if (event.code === "Escape") {
+				setArchiveOpen(false);
+				setWorldMapOpen(false);
+			}
 		};
 		window.addEventListener("keydown", down);
 		return () => window.removeEventListener("keydown", down);
-	}, [setArchiveOpen, toggleCamera]);
+	}, [
+		setArchiveOpen,
+		setWorldMapOpen,
+		toggleCamera
+	]);
 	const notice = justRecordedId ? recordById(justRecordedId) : void 0;
 	return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 		className: "pointer-events-none absolute inset-0 z-10",
@@ -2071,19 +2788,19 @@ function Hud({ onLeave }) {
 						children: ZONE_NAME
 					}, void 0, false, {
 						fileName: _jsxFileName$1,
-						lineNumber: 205,
+						lineNumber: 215,
 						columnNumber: 11
 					}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 						className: "font-display text-2xl leading-none text-fg",
 						children: playerName
 					}, void 0, false, {
 						fileName: _jsxFileName$1,
-						lineNumber: 206,
+						lineNumber: 216,
 						columnNumber: 11
 					}, this)]
 				}, void 0, true, {
 					fileName: _jsxFileName$1,
-					lineNumber: 204,
+					lineNumber: 214,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 					className: "pointer-events-auto flex gap-2",
@@ -2096,16 +2813,31 @@ function Hud({ onLeave }) {
 							"aria-label": muted ? "Unmute the Hum" : "Mute the Hum",
 							children: muted ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(VolumeX, { className: "size-5" }, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 215,
+								lineNumber: 225,
 								columnNumber: 22
 							}, this) : /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Volume2, { className: "size-5" }, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 215,
+								lineNumber: 225,
 								columnNumber: 55
 							}, this)
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 209,
+							lineNumber: 219,
+							columnNumber: 11
+						}, this),
+						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
+							type: "button",
+							className: "flex size-11 items-center justify-center rounded-lg border border-border bg-surface text-fg",
+							onClick: () => setWorldMapOpen(true),
+							"aria-label": "Open world map",
+							children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Globe, { className: "size-5" }, void 0, false, {
+								fileName: _jsxFileName$1,
+								lineNumber: 233,
+								columnNumber: 13
+							}, this)
+						}, void 0, false, {
+							fileName: _jsxFileName$1,
+							lineNumber: 227,
 							columnNumber: 11
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
@@ -2115,12 +2847,12 @@ function Hud({ onLeave }) {
 							"aria-label": cameraMode === "third" ? "Switch to first person" : "Switch to third person",
 							children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Camera, { className: "size-5" }, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 223,
+								lineNumber: 241,
 								columnNumber: 13
 							}, this)
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 217,
+							lineNumber: 235,
 							columnNumber: 11
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
@@ -2130,23 +2862,23 @@ function Hud({ onLeave }) {
 							"aria-label": "Open archive",
 							children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(BookOpen, { className: "size-5" }, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 231,
+								lineNumber: 249,
 								columnNumber: 13
 							}, this)
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 225,
+							lineNumber: 243,
 							columnNumber: 11
 						}, this)
 					]
 				}, void 0, true, {
 					fileName: _jsxFileName$1,
-					lineNumber: 208,
+					lineNumber: 218,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
 				fileName: _jsxFileName$1,
-				lineNumber: 203,
+				lineNumber: 213,
 				columnNumber: 7
 			}, this),
 			notice ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
@@ -2154,7 +2886,7 @@ function Hud({ onLeave }) {
 				children: ["Memory recorded — ", notice.title]
 			}, void 0, true, {
 				fileName: _jsxFileName$1,
-				lineNumber: 237,
+				lineNumber: 255,
 				columnNumber: 9
 			}, this) : null,
 			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
@@ -2162,7 +2894,7 @@ function Hud({ onLeave }) {
 				children: nearMemory ? recorded ? "Already in the archive" : "Press E to record this memory" : cameraMode === "third" ? "WASD move · Shift run · Space jump · drag to look · C camera" : "WASD move · Shift run · Space jump · drag to look · C camera"
 			}, void 0, false, {
 				fileName: _jsxFileName$1,
-				lineNumber: 242,
+				lineNumber: 260,
 				columnNumber: 7
 			}, this),
 			nearMemory && !recorded ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
@@ -2170,14 +2902,14 @@ function Hud({ onLeave }) {
 				children: "A memory is close"
 			}, void 0, false, {
 				fileName: _jsxFileName$1,
-				lineNumber: 253,
+				lineNumber: 271,
 				columnNumber: 9
 			}, this) : null,
 			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 				className: "pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between px-4 pb-5 md:hidden",
 				children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Joystick, {}, void 0, false, {
 					fileName: _jsxFileName$1,
-					lineNumber: 259,
+					lineNumber: 277,
 					columnNumber: 9
 				}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
 					className: "flex flex-col items-end gap-3",
@@ -2187,7 +2919,7 @@ function Hud({ onLeave }) {
 							hold: "run"
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 261,
+							lineNumber: 279,
 							columnNumber: 11
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(HoldButton, {
@@ -2199,7 +2931,7 @@ function Hud({ onLeave }) {
 							}
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 262,
+							lineNumber: 280,
 							columnNumber: 11
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(HoldButton, {
@@ -2207,28 +2939,28 @@ function Hud({ onLeave }) {
 							hold: "jump"
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 270,
+							lineNumber: 288,
 							columnNumber: 11
 						}, this)
 					]
 				}, void 0, true, {
 					fileName: _jsxFileName$1,
-					lineNumber: 260,
+					lineNumber: 278,
 					columnNumber: 9
 				}, this)]
 			}, void 0, true, {
 				fileName: _jsxFileName$1,
-				lineNumber: 258,
+				lineNumber: 276,
 				columnNumber: 7
 			}, this),
 			cameraMode === "first" ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", { className: "pointer-events-none absolute top-1/2 left-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" }, void 0, false, {
 				fileName: _jsxFileName$1,
-				lineNumber: 275,
+				lineNumber: 293,
 				columnNumber: 9
 			}, this) : null,
 			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", { className: "vignette pointer-events-none absolute inset-0" }, void 0, false, {
 				fileName: _jsxFileName$1,
-				lineNumber: 278,
+				lineNumber: 296,
 				columnNumber: 7
 			}, this),
 			archiveOpen ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("div", {
@@ -2247,7 +2979,7 @@ function Hud({ onLeave }) {
 								children: "Archive"
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 291,
+								lineNumber: 309,
 								columnNumber: 17
 							}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("h2", {
 								id: "archive-title",
@@ -2255,11 +2987,11 @@ function Hud({ onLeave }) {
 								children: "What was kept"
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 292,
+								lineNumber: 310,
 								columnNumber: 17
 							}, this)] }, void 0, true, {
 								fileName: _jsxFileName$1,
-								lineNumber: 290,
+								lineNumber: 308,
 								columnNumber: 15
 							}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
 								type: "button",
@@ -2268,17 +3000,17 @@ function Hud({ onLeave }) {
 								"aria-label": "Close archive",
 								children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(X, { className: "size-5" }, void 0, false, {
 									fileName: _jsxFileName$1,
-									lineNumber: 302,
+									lineNumber: 320,
 									columnNumber: 17
 								}, this)
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 296,
+								lineNumber: 314,
 								columnNumber: 15
 							}, this)]
 						}, void 0, true, {
 							fileName: _jsxFileName$1,
-							lineNumber: 289,
+							lineNumber: 307,
 							columnNumber: 13
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("section", {
@@ -2288,14 +3020,14 @@ function Hud({ onLeave }) {
 								children: "Recorded by you"
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 307,
+								lineNumber: 325,
 								columnNumber: 15
 							}, this), memories.length === 0 ? /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 								className: "text-sm text-muted",
 								children: "Nothing yet. The golden fragment in the courtyard can be kept."
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 309,
+								lineNumber: 327,
 								columnNumber: 17
 							}, this) : memories.map((id) => {
 								const record = recordById(id);
@@ -2309,34 +3041,34 @@ function Hud({ onLeave }) {
 											children: record.title
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 317,
+											lineNumber: 335,
 											columnNumber: 25
 										}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Badge, { status: record.canonStatus }, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 318,
+											lineNumber: 336,
 											columnNumber: 25
 										}, this)]
 									}, void 0, true, {
 										fileName: _jsxFileName$1,
-										lineNumber: 316,
+										lineNumber: 334,
 										columnNumber: 23
 									}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 										className: "text-sm text-muted",
 										children: record.body
 									}, void 0, false, {
 										fileName: _jsxFileName$1,
-										lineNumber: 320,
+										lineNumber: 338,
 										columnNumber: 23
 									}, this)]
 								}, id, true, {
 									fileName: _jsxFileName$1,
-									lineNumber: 315,
+									lineNumber: 333,
 									columnNumber: 21
 								}, this);
 							})]
 						}, void 0, true, {
 							fileName: _jsxFileName$1,
-							lineNumber: 306,
+							lineNumber: 324,
 							columnNumber: 13
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("section", {
@@ -2347,7 +3079,7 @@ function Hud({ onLeave }) {
 									children: "How a record is marked"
 								}, void 0, false, {
 									fileName: _jsxFileName$1,
-									lineNumber: 328,
+									lineNumber: 346,
 									columnNumber: 15
 								}, this),
 								/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("ul", {
@@ -2358,11 +3090,11 @@ function Hud({ onLeave }) {
 											children: "Canon"
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 331,
+											lineNumber: 349,
 											columnNumber: 19
 										}, this), " — stated by the novels."] }, void 0, true, {
 											fileName: _jsxFileName$1,
-											lineNumber: 330,
+											lineNumber: 348,
 											columnNumber: 17
 										}, this),
 										/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
@@ -2370,11 +3102,11 @@ function Hud({ onLeave }) {
 											children: "Interpretation"
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 334,
+											lineNumber: 352,
 											columnNumber: 19
 										}, this), " — how the game pictures it."] }, void 0, true, {
 											fileName: _jsxFileName$1,
-											lineNumber: 333,
+											lineNumber: 351,
 											columnNumber: 17
 										}, this),
 										/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
@@ -2382,11 +3114,11 @@ function Hud({ onLeave }) {
 											children: "Expansion"
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 337,
+											lineNumber: 355,
 											columnNumber: 19
 										}, this), " — made for play."] }, void 0, true, {
 											fileName: _jsxFileName$1,
-											lineNumber: 336,
+											lineNumber: 354,
 											columnNumber: 17
 										}, this),
 										/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("li", { children: [/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("span", {
@@ -2394,17 +3126,17 @@ function Hud({ onLeave }) {
 											children: "Documented history"
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 340,
+											lineNumber: 358,
 											columnNumber: 19
 										}, this), " — nonfiction, kept apart from the cosmology."] }, void 0, true, {
 											fileName: _jsxFileName$1,
-											lineNumber: 339,
+											lineNumber: 357,
 											columnNumber: 17
 										}, this)
 									]
 								}, void 0, true, {
 									fileName: _jsxFileName$1,
-									lineNumber: 329,
+									lineNumber: 347,
 									columnNumber: 15
 								}, this),
 								PLACE_NOTES.map((note) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("article", {
@@ -2416,34 +3148,34 @@ function Hud({ onLeave }) {
 											children: note.title
 										}, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 346,
+											lineNumber: 364,
 											columnNumber: 21
 										}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Badge, { status: note.canonStatus }, void 0, false, {
 											fileName: _jsxFileName$1,
-											lineNumber: 347,
+											lineNumber: 365,
 											columnNumber: 21
 										}, this)]
 									}, void 0, true, {
 										fileName: _jsxFileName$1,
-										lineNumber: 345,
+										lineNumber: 363,
 										columnNumber: 19
 									}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 										className: "text-sm text-muted",
 										children: note.body
 									}, void 0, false, {
 										fileName: _jsxFileName$1,
-										lineNumber: 349,
+										lineNumber: 367,
 										columnNumber: 19
 									}, this)]
 								}, note.id, true, {
 									fileName: _jsxFileName$1,
-									lineNumber: 344,
+									lineNumber: 362,
 									columnNumber: 17
 								}, this))
 							]
 						}, void 0, true, {
 							fileName: _jsxFileName$1,
-							lineNumber: 327,
+							lineNumber: 345,
 							columnNumber: 13
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("section", {
@@ -2453,7 +3185,7 @@ function Hud({ onLeave }) {
 								children: "Companion shelf"
 							}, void 0, false, {
 								fileName: _jsxFileName$1,
-								lineNumber: 355,
+								lineNumber: 373,
 								columnNumber: 15
 							}, this), COMPANION_SHELF.map((note) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("article", {
 								className: "rounded-lg border border-border bg-bg p-4",
@@ -2464,33 +3196,33 @@ function Hud({ onLeave }) {
 										children: note.title
 									}, void 0, false, {
 										fileName: _jsxFileName$1,
-										lineNumber: 359,
+										lineNumber: 377,
 										columnNumber: 21
 									}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(Badge, { status: note.canonStatus }, void 0, false, {
 										fileName: _jsxFileName$1,
-										lineNumber: 360,
+										lineNumber: 378,
 										columnNumber: 21
 									}, this)]
 								}, void 0, true, {
 									fileName: _jsxFileName$1,
-									lineNumber: 358,
+									lineNumber: 376,
 									columnNumber: 19
 								}, this), /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("p", {
 									className: "text-sm text-muted",
 									children: note.body
 								}, void 0, false, {
 									fileName: _jsxFileName$1,
-									lineNumber: 362,
+									lineNumber: 380,
 									columnNumber: 19
 								}, this)]
 							}, note.id, true, {
 								fileName: _jsxFileName$1,
-								lineNumber: 357,
+								lineNumber: 375,
 								columnNumber: 17
 							}, this))]
 						}, void 0, true, {
 							fileName: _jsxFileName$1,
-							lineNumber: 354,
+							lineNumber: 372,
 							columnNumber: 13
 						}, this),
 						/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
@@ -2500,24 +3232,36 @@ function Hud({ onLeave }) {
 							children: "Leave the terrace"
 						}, void 0, false, {
 							fileName: _jsxFileName$1,
-							lineNumber: 367,
+							lineNumber: 385,
 							columnNumber: 13
 						}, this)
 					]
 				}, void 0, true, {
 					fileName: _jsxFileName$1,
-					lineNumber: 288,
+					lineNumber: 306,
 					columnNumber: 11
 				}, this)
 			}, void 0, false, {
 				fileName: _jsxFileName$1,
-				lineNumber: 281,
+				lineNumber: 299,
 				columnNumber: 9
-			}, this) : null
+			}, this) : null,
+			/* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(WorldMapModal, {
+				isOpen: worldMapOpen,
+				onClose: () => setWorldMapOpen(false),
+				onTravel: (region) => {
+					setCurrentRegion(region.id);
+					setWorldMapOpen(false);
+				}
+			}, void 0, false, {
+				fileName: _jsxFileName$1,
+				lineNumber: 396,
+				columnNumber: 7
+			}, this)
 		]
 	}, void 0, true, {
 		fileName: _jsxFileName$1,
-		lineNumber: 202,
+		lineNumber: 212,
 		columnNumber: 5
 	}, this);
 }
